@@ -17,10 +17,10 @@ public class DaoEndereco {
 	private EntityManager  em;
 	public DaoEndereco() {
 		emf = Persistence.createEntityManagerFactory("banco_pbd");
-		this.em = this.emf.createEntityManager();
 	}
 	
 	public Endereco obterEnd(int id) {
+		this.em = this.emf.createEntityManager();
 		em.getTransaction().begin();
 		Endereco  end = em.find(Endereco.class, id);
 		em.getTransaction().commit();
@@ -30,6 +30,7 @@ public class DaoEndereco {
 	
 	public void persist(Endereco end) {
 		try{
+			this.em = this.emf.createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
 			em.persist(end);
@@ -43,6 +44,7 @@ public class DaoEndereco {
 	
 	public void updateEndereco(Endereco end) {
 		try{
+			this.em = this.emf.createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
 			em.merge(end);
@@ -55,6 +57,7 @@ public class DaoEndereco {
 	}
 	
 	public List<Endereco> BuscaEnd() {
+		this.em = this.emf.createEntityManager();
 		em.getTransaction().begin(); //  abrindo
 		Query q = em.createQuery("select endereco from Endereco endereco ");
 		List<Endereco> ends =(List<Endereco>) q.getResultList();
@@ -65,6 +68,7 @@ public class DaoEndereco {
 	
 	public void remover(Endereco end) {
 		try{
+			this.em = this.emf.createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			em.remove(end);
 			em.getTransaction().commit(); //  comando  SALVAR
@@ -75,7 +79,5 @@ public class DaoEndereco {
 		}
 	}
 	
-	public Endereco buscaEnd() {
-		return null;
-	}
+	
 }

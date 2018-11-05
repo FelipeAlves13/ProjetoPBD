@@ -11,20 +11,27 @@ import br.com.modelBeans.Endereco;
 import br.com.modelBeans.Pessoa;
 
 public class DaoPessoa {
-	private  EntityManagerFactory  emf  =  Persistence.createEntityManagerFactory("banco_pbd -pu");//  fazer  as  transações  
+	private  EntityManagerFactory  emf  ;
 	private EntityManager  em;
 	
 	public DaoPessoa() {
-		
+		 emf  =  Persistence.createEntityManagerFactory("banco_pbd");//  fazer  as  transações  
 	}
-	
+	public Pessoa obterPessoa(int id) {
+		this.em = this.emf.createEntityManager();
+		em.getTransaction().begin();
+		Pessoa  p = em.find(Pessoa.class, id);
+		em.getTransaction().commit();
+		em.close();
+		return p;
+	}
 	
 	
 	public void persist(Pessoa p) {
 		try{
-			if(this.em==null) {
-				this.em = this.emf.createEntityManager();
-			}//instancia  o  EM
+			
+			this.em = this.emf.createEntityManager();
+			//instancia  o  EM
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
 			em.persist(p);
@@ -37,6 +44,7 @@ public class DaoPessoa {
 	}
 	public void updatePessoa(Pessoa p) {
 		try{
+			this.em = this.emf.createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
 			em.merge(p);
@@ -49,6 +57,7 @@ public class DaoPessoa {
 	}
 	
 	public List<Pessoa> BuscaEnd() {
+		this.em = this.emf.createEntityManager();
 		em.getTransaction().begin(); //  abrindo
 		Query q = em.createQuery("select pessoa from Pessoa pessoa");
 		List<Pessoa> p = q.getResultList();
@@ -59,6 +68,7 @@ public class DaoPessoa {
 	
 	public void remove(Pessoa p) {
 		try{
+			this.em = this.emf.createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			em.remove(p);
 			em.getTransaction().commit(); //  comando  SALVAR

@@ -1,13 +1,17 @@
 package br.com.daoBeans;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
+import br.com.modelBeans.Reserva;
 import br.com.modelBeans.Veiculo;
 
 public class DaoVeiculo {
-	private  EntityManagerFactory  emf  =  Persistence.createEntityManagerFactory("banco_pbd -pu");//  fazer  as  transações  
+	private  EntityManagerFactory  emf  =  Persistence.createEntityManagerFactory("banco_pbd");//  fazer  as  transações  
 	private EntityManager  em;
 	
 	public DaoVeiculo() {
@@ -28,13 +32,51 @@ public class DaoVeiculo {
 			em.close(); //  fevhar  a  conexão
 		}
 	}
-	
-	public void updateEndereco() {
 		
+	public void updateVeiculo(Veiculo v) {
+		try{
+			this.em = this.emf.createEntityManager();
+			em.getTransaction().begin(); //  abrindo  a  conexão
+			//regras  de  negócio  de  persistênciaaqui
+			em.merge(v);
+			em.getTransaction().commit(); //  comando  SALVAR
+		} catch  (Exception  e)  {
+			em.getTransaction().rollback();
+		}  finally  {
+			em.close(); //  fevhar  a  conexão
+		}
 	}
 	
-	public void remover() {
-		 
+	public List<Veiculo> BuscaVeiculo() {
+		this.em = this.emf.createEntityManager();
+		em.getTransaction().begin(); //  abrindo
+		Query q = em.createQuery("select veiculo from Veiculo veiculo ");
+		List<Veiculo> v =(List<Veiculo>) q.getResultList();
+		em.getTransaction().commit();
+		em.close(); 
+		return v;
+	}
+	
+	public void remover(Veiculo v) {
+		try{
+			this.em = this.emf.createEntityManager();
+			em.getTransaction().begin(); //  abrindo  a  conexão
+			em.remove(v);
+			em.getTransaction().commit(); //  comando  SALVAR
+		} catch  (Exception  e)  {
+			em.getTransaction().rollback();
+		}  finally  {
+			em.close(); //  fechar  a  conexão
+		}
+	}
+
+	public Veiculo obterVeiculo(int id) {
+		this.em = this.emf.createEntityManager();
+		em.getTransaction().begin();
+		Veiculo v = em.find(Veiculo.class, id);
+		em.getTransaction().commit();
+		em.close();
+		return v;
 	}
 
 }

@@ -42,7 +42,7 @@ public class Pessoa {
 	@JoinColumn(name ="id_pessoa_f")
 	private Pessoa_fisica pessoaFisica;
 	@OneToOne
-	@JoinColumn(name ="id_pessoa_j")
+	@JoinColumn(name ="id_pessoa_j",nullable=true)
 	private Pessoa_juridica pessoaJuridica;
 	
 	public Pessoa() {
@@ -50,6 +50,23 @@ public class Pessoa {
 	}
 	
 	
+	
+	public Pessoa(String nome, String login, String senha, char sexo, Date data_nasc, int codigo, Endereco endereco,
+			Pessoa_fisica pessoaFisica, Pessoa_juridica pessoaJuridica) {
+		super();
+		this.nome = nome;
+		this.login = login;
+		this.senha = senha;
+		this.sexo = sexo;
+		this.data_nasc = data_nasc;
+		this.codigo = codigo;
+		this.endereco = endereco;
+		this.pessoaFisica = pessoaFisica;
+		this.pessoaJuridica = pessoaJuridica;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

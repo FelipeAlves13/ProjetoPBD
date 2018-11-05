@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 import br.com.modelBeans.Categoria;
 
 public class DaoCategoria {
-	private  EntityManagerFactory  emf  =  Persistence.createEntityManagerFactory("banco_pbd -pu");//  fazer  as  transações  
+	private  EntityManagerFactory  emf  =  Persistence.createEntityManagerFactory("banco_pbd");//  fazer  as  transações  
 	private EntityManager  em;
 	
 	public DaoCategoria() {
