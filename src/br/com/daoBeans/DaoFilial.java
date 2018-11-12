@@ -49,10 +49,11 @@ public class DaoFilial {
 		}
 	}
 	
-	public List<Filial> BuscaFilial() {
+	public List<Filial> BuscaFilial(String name) {
 		this.em = this.emf.createEntityManager();
 		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select filial from Filial filial ");
+		Query q = em.createQuery("select filial from Filial filial where filial.nome like :name ");
+		q.setParameter("name","%"+name+"%");
 		List<Filial> fs =(List<Filial>) q.getResultList();
 		em.getTransaction().commit();
 		em.close(); 

@@ -48,7 +48,7 @@ public class Locacao {
 	private Pessoa pessoa;
 	@ManyToOne
 	@JoinColumn(name="id_pessoa_f")
-	private Pessoa pessoaFisica;
+	private Pessoa motorista;
 	@ManyToOne
 	@JoinColumn(name="id_veiculo")
 	private Veiculo veiculo;
@@ -142,12 +142,13 @@ public class Locacao {
 		this.pessoa = pessoa;
 	}
 
-	public Pessoa getPessoaFisica() {
-		return pessoaFisica;
+	
+	public Pessoa getMotorista() {
+		return motorista;
 	}
 
-	public void setPessoaFisica(Pessoa pessoaFisica) {
-		this.pessoaFisica = pessoaFisica;
+	public void setMotorista(Pessoa motorista) {
+		this.motorista = motorista;
 	}
 
 	public Veiculo getVeiculo() {

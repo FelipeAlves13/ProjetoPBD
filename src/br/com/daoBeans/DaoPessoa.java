@@ -56,10 +56,11 @@ public class DaoPessoa {
 		}
 	}
 	
-	public List<Pessoa> BuscaEnd() {
+	public List<Pessoa> BuscaPessoa(String name) {
 		this.em = this.emf.createEntityManager();
 		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select pessoa from Pessoa pessoa");
+		Query q = em.createQuery("select pessoa from Pessoa pessoa where pessoa.nome like :name");
+		q.setParameter("name","%"+name+"%");
 		List<Pessoa> p = q.getResultList();
 		em.getTransaction().commit();
 		em.close(); 

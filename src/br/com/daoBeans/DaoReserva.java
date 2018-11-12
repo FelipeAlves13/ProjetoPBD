@@ -47,10 +47,11 @@ public class DaoReserva {
 		}
 	}
 	
-	public List<Reserva> BuscaReserva() {
+	public List<Reserva> BuscaReserva(String name) {
 		this.em = this.emf.createEntityManager();
 		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select reserva from Reserva reserva ");
+		Query q = em.createQuery("select reserva from Reserva reserva, Pessoa p where reserva.id_pessoa=p.id p.nome like :name");
+		q.setParameter("name",name);
 		List<Reserva> rs =(List<Reserva>) q.getResultList();
 		em.getTransaction().commit();
 		em.close(); 

@@ -22,6 +22,8 @@ public class Categoria {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="cat_seq")
 	private int id;
+	@Column(nullable=false)
+	private String nome;
 	@Column(length=7,nullable= false)
 	private String tamanho;
 	@Column(nullable=false)

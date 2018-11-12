@@ -56,10 +56,11 @@ public class DaoEndereco {
 		}
 	}
 	
-	public List<Endereco> BuscaEnd() {
+	public List<Endereco> BuscaEnd(String name) {
 		this.em = this.emf.createEntityManager();
 		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select endereco from Endereco endereco ");
+		Query q = em.createQuery("select e from Endereco e where e.cidade like :name",Endereco.class);
+		q.setParameter("name","%"+name+"%");
 		List<Endereco> ends =(List<Endereco>) q.getResultList();
 		em.getTransaction().commit();
 		em.close(); 

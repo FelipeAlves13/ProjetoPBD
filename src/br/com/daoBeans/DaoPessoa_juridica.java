@@ -20,7 +20,7 @@ public class DaoPessoa_juridica {
 		emf = Persistence.createEntityManagerFactory("banco_pbd");//  fazer  as  transações  
 	}
 	
-	public Pessoa_juridica obterPessoa(int id) {
+	public Pessoa_juridica obterPessoaJuridica(int id) {
 		this.em = this.emf.createEntityManager();
 		em.getTransaction().begin();
 		Pessoa_juridica  p = em.find(Pessoa_juridica.class, id);
@@ -58,10 +58,11 @@ public class DaoPessoa_juridica {
 		}
 	}
 	
-	public List<Pessoa_juridica> BuscaEnd() {
+	public List<Pessoa_juridica> BuscaPessoasJuridicas(String cnpj) {
 		this.em = this.emf.createEntityManager();
 		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select pessoa_juridica from Pessoa_juridica pessoa_juridica");
+		Query q = em.createQuery("select pessoa_juridica from Pessoa_juridica pessoa_juridica where pessoa_juridica.cnpj like :cnpj");
+		q.setParameter("cnpj","%"+cnpj+"%");
 		List<Pessoa_juridica> pj = q.getResultList();
 		em.getTransaction().commit();
 		em.close(); 

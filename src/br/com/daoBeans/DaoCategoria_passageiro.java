@@ -50,7 +50,7 @@ public class DaoCategoria_passageiro {
 	public List<Categoria_passageiro> BuscaCategoriaPassageiro() {
 		this.em = this.emf.createEntityManager();
 		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select categoria_passageiro from Categoria_passageiro categoria_passageiro ");
+		Query q = em.createQuery("select cp from Categoria_passageiro cp ");
 		List<Categoria_passageiro> cp =(List<Categoria_passageiro>) q.getResultList();
 		em.getTransaction().commit();
 		em.close(); 
@@ -70,7 +70,7 @@ public class DaoCategoria_passageiro {
 		}
 	}
 
-	public Categoria_passageiro obterReserva(int id) {
+	public Categoria_passageiro obterCategoria_passageiro(int id) {
 		this.em = this.emf.createEntityManager();
 		em.getTransaction().begin();
 		Categoria_passageiro cp = em.find(Categoria_passageiro.class, id);

@@ -48,10 +48,11 @@ public class DaoFuncionario {
 		}
 	}
 	
-	public List<Funcionario> BuscaFuncionario() {
+	public List<Funcionario> BuscaFuncionario(String name) {
 		this.em = this.emf.createEntityManager();
 		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select funcionario from Funcionario funcionario ");
+		Query q = em.createQuery("select funcionario from Funcionario funcionario where funcionario.nome like :name");
+		q.setParameter("name","%"+name+"%");
 		List<Funcionario> fs =(List<Funcionario>) q.getResultList();
 		em.getTransaction().commit();
 		em.close(); 

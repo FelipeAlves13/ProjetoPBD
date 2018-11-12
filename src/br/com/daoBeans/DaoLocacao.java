@@ -49,10 +49,11 @@ public class DaoLocacao {
 		}
 	}
 	
-	public List<Locacao> BuscaLocacao() {
+	public List<Locacao> BuscaLocacao(String name) {
 		this.em = this.emf.createEntityManager();
 		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select locacao from Locacao locacao ");
+		Query q = em.createQuery("select locacao from Locacao locacao, Pessoa p where locacao.id_pessoa=p.id and p.nome like :name");
+		q.setParameter("name","%"+name+"%");
 		List<Locacao> ls =(List<Locacao>) q.getResultList();
 		em.getTransaction().commit();
 		em.close(); 
