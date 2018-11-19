@@ -28,10 +28,6 @@ public class Locacao {
 	private boolean km_controle;
 	@Column(nullable=false)
 	private double taxa;
-	@Column(length=100,nullable=false)
-	private String filial_entrega;
-	@Column(length=100,nullable=false)
-	private String filial_origem;
 	@Column(nullable=false)
 	@Temporal(TemporalType.TIME)
 	private Date hora;
@@ -55,6 +51,12 @@ public class Locacao {
 	@ManyToOne
 	@JoinColumn(name="id_funcionario")
 	private Funcionario funcionario;
+	@ManyToOne
+	@JoinColumn(name="id_filial_entrega")
+	private Filial filial_entrega;
+	@ManyToOne
+	@JoinColumn(name="id_filial_origem")
+	private Filial filial_origem;
 	
 	
 	public int getId() {
@@ -85,23 +87,24 @@ public class Locacao {
 		this.taxa = taxa;
 	}
 	
-	public String getFilial_entrega() {
+		
+	
+	public Filial getFilial_entrega() {
 		return filial_entrega;
 	}
-	
-	public void setFilial_entrega(String filial_entrega) {
+
+	public void setFilial_entrega(Filial filial_entrega) {
 		this.filial_entrega = filial_entrega;
 	}
-	
-	public String getFilial_origem() {
+
+	public Filial getFilial_origem() {
 		return filial_origem;
 	}
-	
-	public void setFilial_origem(String filial_origem) {
+
+	public void setFilial_origem(Filial filial_origem) {
 		this.filial_origem = filial_origem;
 	}
-	
-	
+
 	public Date getHora() {
 		return hora;
 	}
