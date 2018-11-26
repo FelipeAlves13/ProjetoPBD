@@ -10,17 +10,18 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import br.com.modelBeans.Categoria_carga;
 import br.com.modelBeans.Endereco;
 
 public class DaoEndereco {
-	private  EntityManagerFactory  emf;   //  fazer  as  transações  
+	
 	private EntityManager  em;
 	public DaoEndereco() {
-		emf = Persistence.createEntityManagerFactory("banco_pbd");
+		
 	}
 	
 	public Endereco obterEnd(int id) {
-		this.em = this.emf.createEntityManager();
+		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin();
 		Endereco  end = em.find(Endereco.class, id);
 		em.getTransaction().commit();
@@ -30,7 +31,7 @@ public class DaoEndereco {
 	
 	public void persist(Endereco end) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
 			em.persist(end);
@@ -41,10 +42,23 @@ public class DaoEndereco {
 			em.close(); //  fevhar  a  conexão
 		}
 	}
-	
+	public void refresh(Endereco end) {
+		try{
+			this.em = Connection.getEmf().createEntityManager();
+			//instancia  o  EM
+			em.getTransaction().begin(); //  abrindo  a  conexão
+			//regras  de  negócio  de  persistênciaaqui
+			em.refresh(end);
+			em.getTransaction().commit(); //  comando  SALVAR
+		} catch  (Exception  e)  {
+			em.getTransaction().rollback();
+		}  finally  {
+			em.close(); //  fevhar  a  conexão
+		}
+	}
 	public void updateEndereco(Endereco end) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
 			em.merge(end);
@@ -57,7 +71,7 @@ public class DaoEndereco {
 	}
 	
 	public List<Endereco> BuscaEnd(String name) {
-		this.em = this.emf.createEntityManager();
+		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin(); //  abrindo
 		Query q = em.createQuery("select e from Endereco e where e.cidade like :name",Endereco.class);
 		q.setParameter("name","%"+name+"%");
@@ -69,7 +83,7 @@ public class DaoEndereco {
 	
 	public void remover(Endereco end) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			em.remove(end);
 			em.getTransaction().commit(); //  comando  SALVAR

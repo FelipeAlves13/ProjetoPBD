@@ -7,11 +7,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import br.com.modelBeans.Categoria_carga;
 import br.com.modelBeans.Endereco;
 import br.com.modelBeans.Reserva;
 
 public class DaoReserva {
-	private  EntityManagerFactory  emf  =  Persistence.createEntityManagerFactory("banco_pbd");//  fazer  as  transações  
+	//  fazer  as  transações  
 	private EntityManager  em;
 	
 	public DaoReserva() {
@@ -20,7 +21,7 @@ public class DaoReserva {
 	
 	public void persist(Reserva r) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em =Connection.getEmf().createEntityManager();
 			//instancia  o  EM
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
@@ -35,7 +36,7 @@ public class DaoReserva {
 	
 	public void updateReserva(Reserva r) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
 			em.merge(r);
@@ -47,8 +48,23 @@ public class DaoReserva {
 		}
 	}
 	
+	public void refresh(Reserva r) {
+		try{
+			this.em = Connection.getEmf().createEntityManager();
+			//instancia  o  EM
+			em.getTransaction().begin(); //  abrindo  a  conexão
+			//regras  de  negócio  de  persistênciaaqui
+			em.refresh(r);
+			em.getTransaction().commit(); //  comando  SALVAR
+		} catch  (Exception  e)  {
+			em.getTransaction().rollback();
+		}  finally  {
+			em.close(); //  fevhar  a  conexão
+		}
+	}
+	
 	public List<Reserva> BuscaReserva(String name) {
-		this.em = this.emf.createEntityManager();
+		this.em =Connection.getEmf().createEntityManager();
 		em.getTransaction().begin(); //  abrindo
 		Query q = em.createQuery("select reserva from Reserva reserva, Pessoa p where reserva.id_pessoa=p.id p.nome like :name");
 		q.setParameter("name",name);
@@ -60,7 +76,7 @@ public class DaoReserva {
 	
 	public void remover(Reserva r) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			em.remove(r);
 			em.getTransaction().commit(); //  comando  SALVAR
@@ -72,7 +88,7 @@ public class DaoReserva {
 	}
 
 	public Reserva obterReserva(int id) {
-		this.em = this.emf.createEntityManager();
+		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin();
 		Reserva r = em.find(Reserva.class, id);
 		em.getTransaction().commit();

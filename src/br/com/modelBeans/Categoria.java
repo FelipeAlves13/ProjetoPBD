@@ -24,8 +24,8 @@ public class Categoria {
 	private int id;
 	@Column(nullable=false)
 	private String nome;
-	@Column(length=7,nullable= false)
-	private String tamanho;
+//	@Column(length=7,nullable= false)
+//	private String tamanho;
 	@Column(nullable=false)
 	private boolean camera_re;
 	@Column(nullable=false)
@@ -64,13 +64,13 @@ public class Categoria {
 		return id;
 	}
 	
-	public String getTamanho() {
-		return tamanho;
-	}
-	
-	public void setTamanho(String tamanho) {
-		this.tamanho = tamanho;
-	}
+//	public String getTamanho() {
+//		return tamanho;
+//	}
+//	
+//	public void setTamanho(String tamanho) {
+//		this.tamanho = tamanho;
+//	}
 	
 	public boolean isCamera_re() {
 		return camera_re;
@@ -142,6 +142,31 @@ public class Categoria {
 	
 	public void setCategoria_carga(Categoria_carga categoria_carga) {
 		this.categoria_carga = categoria_carga;
+	}
+
+
+	public Date getTempoRevisao() {
+		return tempoRevisao;
+	}
+
+
+	public void setTempoRevisao(Date tempoRevisao) {
+		this.tempoRevisao = tempoRevisao;
+	}
+
+
+	public Date getTempoLimpeza() {
+		return tempoLimpeza;
+	}
+
+
+	public void setTempoLimpeza(Date tempoLimpeza) {
+		this.tempoLimpeza = tempoLimpeza;
+	}
+
+
+	public String getNome() {
+		return nome;
 	}
 		
 

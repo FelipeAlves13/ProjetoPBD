@@ -7,30 +7,44 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import br.com.modelBeans.Categoria_carga;
 import br.com.modelBeans.Endereco;
 import br.com.modelBeans.Pessoa;
 
 public class DaoPessoa {
-	private  EntityManagerFactory  emf  ;
+	//private  EntityManagerFactory  emf  ;
 	private EntityManager  em;
 	
 	public DaoPessoa() {
-		 emf  =  Persistence.createEntityManagerFactory("banco_pbd");//  fazer  as  transações  
+		//  fazer  as  transações  
 	}
 	public Pessoa obterPessoa(int id) {
-		this.em = this.emf.createEntityManager();
+		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin();
 		Pessoa  p = em.find(Pessoa.class, id);
 		em.getTransaction().commit();
 		em.close();
 		return p;
 	}
-	
+	public void refresh(Pessoa p) {
+		try{
+			this.em = Connection.getEmf().createEntityManager();
+			//instancia  o  EM
+			em.getTransaction().begin(); //  abrindo  a  conexão
+			//regras  de  negócio  de  persistênciaaqui
+			em.refresh(p);
+			em.getTransaction().commit(); //  comando  SALVAR
+		} catch  (Exception  e)  {
+			em.getTransaction().rollback();
+		}  finally  {
+			em.close(); //  fevhar  a  conexão
+		}
+	}
 	
 	public void persist(Pessoa p) {
 		try{
 			
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			//instancia  o  EM
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
@@ -44,7 +58,7 @@ public class DaoPessoa {
 	}
 	public void updatePessoa(Pessoa p) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
 			em.merge(p);
@@ -57,7 +71,7 @@ public class DaoPessoa {
 	}
 	
 	public List<Pessoa> BuscaPessoa(String name) {
-		this.em = this.emf.createEntityManager();
+		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin(); //  abrindo
 		Query q = em.createQuery("select pessoa from Pessoa pessoa where pessoa.nome like :name");
 		q.setParameter("name","%"+name+"%");
@@ -69,7 +83,7 @@ public class DaoPessoa {
 	
 	public void remove(Pessoa p) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			em.remove(p);
 			em.getTransaction().commit(); //  comando  SALVAR

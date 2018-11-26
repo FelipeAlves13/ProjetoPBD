@@ -9,9 +9,10 @@ import javax.persistence.Query;
 
 import br.com.modelBeans.Categoria;
 import br.com.modelBeans.Categoria_carga;
+import br.com.modelBeans.Categoria_passageiro;
 
 public class DaoCategoria_carga {
-	private  EntityManagerFactory  emf  =  Persistence.createEntityManagerFactory("banco_pbd");//  fazer  as  transações  
+
 	private EntityManager  em;
 	
 	public DaoCategoria_carga() {
@@ -19,7 +20,7 @@ public class DaoCategoria_carga {
 	}
 	
 	public Categoria_carga obterCategoriaCarga(int id) {
-		this.em = this.emf.createEntityManager();
+		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin();
 		Categoria_carga cc = em.find(Categoria_carga.class, id);
 		em.getTransaction().commit();
@@ -27,9 +28,24 @@ public class DaoCategoria_carga {
 		return cc;
 	}
 	
+	public void refresh(Categoria_carga cc) {
+		try{
+			this.em = Connection.getEmf().createEntityManager();
+			//instancia  o  EM
+			em.getTransaction().begin(); //  abrindo  a  conexão
+			//regras  de  negócio  de  persistênciaaqui
+			em.refresh(cc);
+			em.getTransaction().commit(); //  comando  SALVAR
+		} catch  (Exception  e)  {
+			em.getTransaction().rollback();
+		}  finally  {
+			em.close(); //  fevhar  a  conexão
+		}
+	}
+	
 	public void persist(Categoria_carga cc) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			//instancia  o  EM
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
@@ -44,7 +60,7 @@ public class DaoCategoria_carga {
 	
 	public void updateCategoriaCarga(Categoria_carga cc) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
 			em.merge(cc);
@@ -57,7 +73,7 @@ public class DaoCategoria_carga {
 	}
 	
 	public List<Categoria_carga> BuscaCategoriaCarga() {
-		this.em = this.emf.createEntityManager();
+		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin(); //  abrindo
 		Query q = em.createQuery("select categoria_carga from Categoria_carga categoria_carga ");
 		List<Categoria_carga> ccs =(List<Categoria_carga>) q.getResultList();
@@ -68,7 +84,7 @@ public class DaoCategoria_carga {
 	
 	public void remover(Categoria_carga cc) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			em.remove(cc);
 			em.getTransaction().commit(); //  comando  SALVAR
@@ -77,6 +93,16 @@ public class DaoCategoria_carga {
 		}  finally  {
 			em.close(); //  fevhar  a  conexão
 		}
+	}
+	
+	public Categoria_carga buscarIdDoUltimoDado() {
+		em.getTransaction().begin();
+		Query q = em.createQuery("select cc from Categoria_carga cc order by cc.id DESC");
+		List<Categoria_carga> ccs =(List<Categoria_carga>) q.getResultList();
+		em.getTransaction().commit();
+		em.close();
+		Categoria_carga cc = ccs.get(0);
+		return cc;
 	}
 
 }

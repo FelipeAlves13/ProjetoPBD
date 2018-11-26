@@ -2,6 +2,7 @@ package br.com.modelBeans;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name="pessoa")
@@ -28,20 +31,20 @@ public class Pessoa {
 	private String login;
 	@Column(nullable=false)
 	private String senha;
-	@Column(nullable=false)
-	private char sexo;
+	@Column(nullable=false,length=1)
+	private String sexo;
 	@Column(nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date data_nasc;
 	@Column(unique= true,nullable=false)
 	private int codigo;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_endereco")
 	private Endereco endereco;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name ="id_pessoa_f")
 	private Pessoa_fisica pessoaFisica;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name ="id_pessoa_j",nullable=true)
 	private Pessoa_juridica pessoaJuridica;
 	
@@ -51,7 +54,7 @@ public class Pessoa {
 	
 	
 	
-	public Pessoa(String nome, String login, String senha, char sexo, Date data_nasc, int codigo, Endereco endereco,
+	public Pessoa(String nome, String login, String senha, String sexo, Date data_nasc, int codigo, Endereco endereco,
 			Pessoa_fisica pessoaFisica, Pessoa_juridica pessoaJuridica) {
 		super();
 		this.nome = nome;
@@ -89,10 +92,10 @@ public class Pessoa {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public char getSexo() {
+	public String getSexo() {
 		return sexo;
 	}
-	public void setSexo(char sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 	public Date getData_nasc() {

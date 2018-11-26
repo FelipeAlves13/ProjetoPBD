@@ -7,11 +7,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import br.com.modelBeans.Categoria_carga;
 import br.com.modelBeans.Filial;
 import br.com.modelBeans.Reserva;
 
 public class DaoFilial {
-	private  EntityManagerFactory  emf  =  Persistence.createEntityManagerFactory("banco_pbd");//  fazer  as  transações  
+//  fazer  as  transações  
 	private EntityManager  em;
 	
 	public DaoFilial() {
@@ -20,7 +21,7 @@ public class DaoFilial {
 	
 	public void persist(Filial f) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			//instancia  o  EM
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
@@ -37,7 +38,7 @@ public class DaoFilial {
 	
 	public void updateFilial(Filial f) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em =Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
 			em.merge(f);
@@ -50,7 +51,7 @@ public class DaoFilial {
 	}
 	
 	public List<Filial> BuscaFilial(String name) {
-		this.em = this.emf.createEntityManager();
+		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin(); //  abrindo
 		Query q = em.createQuery("select filial from Filial filial where filial.nome like :name ");
 		q.setParameter("name","%"+name+"%");
@@ -59,10 +60,24 @@ public class DaoFilial {
 		em.close(); 
 		return fs;
 	}
+	public void refresh(Filial f) {
+		try{
+			this.em = Connection.getEmf().createEntityManager();
+			//instancia  o  EM
+			em.getTransaction().begin(); //  abrindo  a  conexão
+			//regras  de  negócio  de  persistênciaaqui
+			em.refresh(f);
+			em.getTransaction().commit(); //  comando  SALVAR
+		} catch  (Exception  e)  {
+			em.getTransaction().rollback();
+		}  finally  {
+			em.close(); //  fevhar  a  conexão
+		}
+	}
 	
 	public void remover(Filial f) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			em.remove(f);
 			em.getTransaction().commit(); //  comando  SALVAR
@@ -74,7 +89,7 @@ public class DaoFilial {
 	}
 
 	public Filial obterFilial(int id) {
-		this.em = this.emf.createEntityManager();
+		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin();
 		Filial f = em.find(Filial.class, id);
 		em.getTransaction().commit();

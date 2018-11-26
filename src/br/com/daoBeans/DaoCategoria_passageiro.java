@@ -7,11 +7,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import br.com.modelBeans.Categoria_carga;
 import br.com.modelBeans.Categoria_passageiro;
 import br.com.modelBeans.Reserva;
 
 public class DaoCategoria_passageiro {
-	private  EntityManagerFactory  emf  =  Persistence.createEntityManagerFactory("banco_pbd");//  fazer  as  transações  
+	//  fazer  as  transações  
 	private EntityManager  em;
 	
 	public DaoCategoria_passageiro() {
@@ -20,7 +21,7 @@ public class DaoCategoria_passageiro {
 	
 	public void persist(Categoria_passageiro cp) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			//instancia  o  EM
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
@@ -35,7 +36,7 @@ public class DaoCategoria_passageiro {
 	
 	public void updateCategoriaPassageiro(Categoria_passageiro cp) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
 			em.merge(cp);
@@ -47,8 +48,23 @@ public class DaoCategoria_passageiro {
 		}
 	}
 	
+	public void refresh(Categoria_passageiro cp) {
+		try{
+			this.em = Connection.getEmf().createEntityManager();
+			//instancia  o  EM
+			em.getTransaction().begin(); //  abrindo  a  conexão
+			//regras  de  negócio  de  persistênciaaqui
+			em.refresh(cp);
+			em.getTransaction().commit(); //  comando  SALVAR
+		} catch  (Exception  e)  {
+			em.getTransaction().rollback();
+		}  finally  {
+			em.close(); //  fevhar  a  conexão
+		}
+	}
+	
 	public List<Categoria_passageiro> BuscaCategoriaPassageiro() {
-		this.em = this.emf.createEntityManager();
+		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin(); //  abrindo
 		Query q = em.createQuery("select cp from Categoria_passageiro cp ");
 		List<Categoria_passageiro> cp =(List<Categoria_passageiro>) q.getResultList();
@@ -59,7 +75,7 @@ public class DaoCategoria_passageiro {
 	
 	public void remover(Categoria_passageiro cp) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			em.remove(cp);
 			em.getTransaction().commit(); //  comando  SALVAR
@@ -71,11 +87,21 @@ public class DaoCategoria_passageiro {
 	}
 
 	public Categoria_passageiro obterCategoria_passageiro(int id) {
-		this.em = this.emf.createEntityManager();
+		this.em =Connection.getEmf().createEntityManager();
 		em.getTransaction().begin();
 		Categoria_passageiro cp = em.find(Categoria_passageiro.class, id);
 		em.getTransaction().commit();
 		em.close();
+		return cp;
+	}
+	
+	public Categoria_passageiro buscarIdDoUltimoDado() {
+		em.getTransaction().begin();
+		Query q = em.createQuery("select cp from Categoria_passageiro cp order by cp.id DESC");
+		List<Categoria_passageiro> cps =(List<Categoria_passageiro>) q.getResultList();
+		em.getTransaction().commit();
+		em.close();
+		Categoria_passageiro cp = cps.get(0);
 		return cp;
 	}
 

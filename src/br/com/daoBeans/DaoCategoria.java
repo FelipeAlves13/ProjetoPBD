@@ -6,12 +6,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.swing.JLabel;
 
 import br.com.modelBeans.Categoria;
+import br.com.modelBeans.Categoria_carga;
 import br.com.modelBeans.Categoria_passageiro;
 
 public class DaoCategoria {
-	private  EntityManagerFactory  emf  =  Persistence.createEntityManagerFactory("banco_pbd");//  fazer  as  transações  
+//  fazer  as  transações  
 	private EntityManager  em;
 	
 	public DaoCategoria() {
@@ -20,7 +22,7 @@ public class DaoCategoria {
 	
 	public void persist(Categoria c) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			//instancia  o  EM
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
@@ -35,7 +37,7 @@ public class DaoCategoria {
 	
 	public void updateCategoria(Categoria c) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			//regras  de  negócio  de  persistênciaaqui
 			em.merge(c);
@@ -47,8 +49,23 @@ public class DaoCategoria {
 		}
 	}
 	
+	public void refresh(Categoria c) {
+		try{
+			this.em = Connection.getEmf().createEntityManager();
+			//instancia  o  EM
+			em.getTransaction().begin(); //  abrindo  a  conexão
+			//regras  de  negócio  de  persistênciaaqui
+			em.refresh(c);
+			em.getTransaction().commit(); //  comando  SALVAR
+		} catch  (Exception  e)  {
+			em.getTransaction().rollback();
+		}  finally  {
+			em.close(); //  fevhar  a  conexão
+		}
+	}
+	
 	public List<Categoria> BuscaCategoria(String name) {
-		this.em = this.emf.createEntityManager();
+		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin(); //  abrindo
 		Query q = em.createQuery("select c from Categoria c where c.nome like :name");
 		q.setParameter("name","%"+name+"%");
@@ -60,7 +77,7 @@ public class DaoCategoria {
 	
 	public void remover(Categoria c) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
 			em.remove(c);
 			em.getTransaction().commit(); //  comando  SALVAR
@@ -72,7 +89,7 @@ public class DaoCategoria {
 	}
 
 	public Categoria obterCategoria(int id) {
-		this.em = this.emf.createEntityManager();
+		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin();
 		Categoria c = em.find(Categoria.class, id);
 		em.getTransaction().commit();
