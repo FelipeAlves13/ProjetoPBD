@@ -221,11 +221,12 @@ public class ControleCadastroLocacao implements PropertyChangeListener,ActionLis
 						controleLocacao.getLocacoes().get(controleLocacao.getTelaLocacao().getTable().getSelectedRow()).setFilial_entrega(controleLocacao.getFiliais().get(this.telaCadastroLocacao.getFilialEntrgaBox().getSelectedIndex()));
 						controleLocacao.getLocacoes().get(controleLocacao.getTelaLocacao().getTable().getSelectedRow()).setKm_controle(false);
 						controleLocacao.getLocacoes().get(controleLocacao.getTelaLocacao().getTable().getSelectedRow()).setKm_livre(true);
-						//controleLocacao.getLocacoes().get(controleLocacao.getTelaLocacao().getTable().getSelectedRow()).setHora_entrega(TratadorDeMascara.hora(this.telaCadastroLocacao.getDataEntregaField().getText()));
+						
 					}else{
 						controleLocacao.getLocacoes().get(controleLocacao.getTelaLocacao().getTable().getSelectedRow()).setKm_controle(true);
 						controleLocacao.getLocacoes().get(controleLocacao.getTelaLocacao().getTable().getSelectedRow()).setKm_livre(false);
 					}
+					controleLocacao.getLocacoes().get(controleLocacao.getTelaLocacao().getTable().getSelectedRow()).setHora_entrega(sdf3.parse(this.telaCadastroLocacao.getHoraEntregaField().getText()));
 					daoLocacao.updateLocacao(controleLocacao.getLocacoes().get(controleLocacao.getTelaLocacao().getTable().getSelectedRow()));
 					JOptionPane.showMessageDialog(null,"Locação Editada com sucesso!!");
 					this.telaCadastroLocacao.setVisible(false);
@@ -244,7 +245,7 @@ public class ControleCadastroLocacao implements PropertyChangeListener,ActionLis
 					l.setFuncionario(ControlerTelaLogin.getF());
 					l.setVeiculo(veiculos.get(this.telaCadastroLocacao.getVeiculoBox().getSelectedIndex()));
 					l.setData_entrega(TratadorDeMascara.coletorDeData(this.telaCadastroLocacao.getDataEntregaField().getText()));
-				//	l.setHora_entrega(TratadorDeMascara.hora(this.telaCadastroLocacao.getFie));
+					l.setHora_entrega(TratadorDeMascara.hora(this.telaCadastroLocacao.getHoraEntregaField().getText()));
 					l.setValo_total(Double.parseDouble(this.telaCadastroLocacao.getValorField().getText()));
 					l.setValor_Pago(Double.parseDouble(this.telaCadastroLocacao.getValorPagagoField().getText()));
 					l.setFilial_entrega(controleLocacao.getFiliais().get(this.telaCadastroLocacao.getFilialEntrgaBox().getSelectedIndex()));

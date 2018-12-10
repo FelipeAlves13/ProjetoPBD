@@ -81,6 +81,7 @@ public class ControleLocacao implements ActionListener {
 				this.telaCadastroLocacao.getValorPagagoField().setText("");
 				this.telaCadastroLocacao.getTaxaField_2().setText("");
 				this.telaCadastroLocacao.getValorRestantetField().setText("");
+				this.telaCadastroLocacao.getHoraEntregaField().setText("");
 				
 				if(filiais.size()>0){
 					filiais.removeAll(filiais);
@@ -191,7 +192,7 @@ public class ControleLocacao implements ActionListener {
 				if(locacoes.get(this.telaLocacao.getTable().getSelectedRow()).isKm_livre()){
 					this.telaCadastroLocacao.getModalidadeBox().setSelectedIndex(1);
 				}else if (locacoes.get(this.telaLocacao.getTable().getSelectedRow()).isKm_controle()){
-					this.telaCadastroLocacao.getModalidadeBox().setSelectedIndex(0);
+					this.telaCadastroLocacao.getModalidadeBox().setSelectedIndex(2);
 				}
 				
 				if(telaCadastroLocacao.getModalidadeBox().getSelectedIndex()==0){
@@ -211,9 +212,11 @@ public class ControleLocacao implements ActionListener {
 //					telaCadastroLocacao.getDataEntregaField().setVisible(true);
 //					telaCadastroLocacao.getValorRestantetField().setVisible(false);
 				}
-				
+				SimpleDateFormat sd4 = new SimpleDateFormat("hh:mm");
 				this.telaCadastroLocacao.getTaxaField_2().setText(""+locacoes.get(this.telaLocacao.getTable().getSelectedRow()).getTaxa());
 				this.telaCadastroLocacao.getValorPagagoField().setText(""+locacoes.get(this.telaLocacao.getTable().getSelectedRow()).getValor_Pago());
+				this.telaCadastroLocacao.getValorField().setText(""+locacoes.get(this.telaLocacao.getTable().getSelectedRow()).getValo_total());
+				this.telaCadastroLocacao.getHoraEntregaField().setText(sd4.format(locacoes.get(this.telaLocacao.getTable().getSelectedRow()).getHora_entrega()));
 				this.telaCadastroLocacao.setVisible(true);
 			}else{
 				JOptionPane.showMessageDialog(null,"Selecione uma locacao da tabela para editar");

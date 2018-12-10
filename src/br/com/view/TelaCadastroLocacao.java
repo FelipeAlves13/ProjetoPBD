@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -37,6 +38,7 @@ public class TelaCadastroLocacao extends JDialog {
 	private JTextField valorPagagoField;
 	private JLabel lblValorRestante,lblDataDeEntrega;
 	private JTextField valorRestantetField;
+	private JFormattedTextField horaEntregaField;
 
 	
 	public TelaCadastroLocacao() throws ParseException {
@@ -237,6 +239,28 @@ public class TelaCadastroLocacao extends JDialog {
 		categoriaBox.setBounds(10, 157, 210, 27);
 		contentPanel.add(categoriaBox);
 		
+		JLabel lblHoraDeEntrega = new JLabel("hora de entrega");
+		lblHoraDeEntrega.setBounds(398, 248, 117, 14);
+		contentPanel.add(lblHoraDeEntrega);
+		
+		horaEntregaField = new JFormattedTextField();
+		horaEntregaField.setBounds(398, 266, 93, 27);
+		contentPanel.add(horaEntregaField);
+		horaEntregaField.setColumns(10);
+		this.mascaraHora();
+	}
+	private void mascaraHora() {
+
+		try{
+			javax.swing.text.MaskFormatter format_textField4 = new javax.swing.text.MaskFormatter("##:##");
+			format_textField4.install(horaEntregaField);
+		}catch (Exception e){}
+	}
+
+
+
+	public JTextField getHoraEntregaField() {
+		return horaEntregaField;
 	}
 
 
@@ -420,7 +444,4 @@ public class TelaCadastroLocacao extends JDialog {
 	public JTextField getValorRestantetField() {
 		return valorRestantetField;
 	}
-	
-	
-	
 }
