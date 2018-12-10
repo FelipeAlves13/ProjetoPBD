@@ -3,8 +3,10 @@ package br.com.view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -16,154 +18,196 @@ import javax.swing.JSeparator;
 import javax.swing.JComboBox;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+import java.awt.SystemColor;
 
 public class TelaCadastroCategoria extends JDialog {
 
-	private final JPanel contentPanel = new JPanel();
+	
+	private CategoriaPasasageiroPanel panel;
+	private CategoriaCargaPanel panelCarga;
 	private JButton btnRegistrar;
-	private JTextField nomeField,tpLimpezaField,tpRevisaoField;
+	private JTextField nomeField;
+	private JFormattedTextField tpLimpezaField,tpRevisaoField;
 	private JCheckBox cameraCheckBox,direcaoHidraulicaCheckBox,mp3CheckBox,dvdCheckBox,arCondicionadoCheckBox,radioCheckBox
-					  ,rodasCheckBox,airBargCheckBox,direcaoAssistidaCheckBox,cintoCheckBox,controleCheckBox;
+					  ;
 	private JRadioButton rdbtnPassageiro,rdbtnCarga;
 	private JComboBox comboBox;
+	private JPanel panel_1;
+	private JLabel lblCadastroCategoria;
 	public TelaCadastroCategoria() {
-		setBounds(100, 100, 572, 406);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setForeground(Color.WHITE);
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		getContentPane().setBackground(SystemColor.text);
+		getContentPane().setLayout(null);
+		setSize(600,470);
 		
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(10, 37, 46, 14);
-		contentPanel.add(lblNome);
+		lblNome.setBounds(10, 80, 46, 14);
+		getContentPane().add(lblNome);
 		
 		nomeField = new JTextField();
-		nomeField.setBounds(10, 51, 286, 20);
-		contentPanel.add(nomeField);
+		nomeField.setBounds(10, 95, 286, 28);
+		getContentPane().add(nomeField);
 		nomeField.setColumns(10);
 		
 		JLabel lblTempoDeLimpeza = new JLabel("Tempo de limpeza");
-		lblTempoDeLimpeza.setBounds(317, 37, 119, 14);
-		contentPanel.add(lblTempoDeLimpeza);
+		lblTempoDeLimpeza.setBounds(317, 80, 119, 14);
+		getContentPane().add(lblTempoDeLimpeza);
 		
 		JLabel lblTempoDeReviso = new JLabel("Tempo de revis\u00E3o");
-		lblTempoDeReviso.setBounds(444, 37, 124, 14);
-		contentPanel.add(lblTempoDeReviso);
+		lblTempoDeReviso.setBounds(444, 80, 124, 14);
+		getContentPane().add(lblTempoDeReviso);
 		
-		tpLimpezaField = new JTextField();
-		tpLimpezaField.setBounds(317, 51, 105, 20);
-		contentPanel.add(tpLimpezaField);
+		tpLimpezaField = new JFormattedTextField();
+		tpLimpezaField.setBounds(317, 95, 105, 28);
+		getContentPane().add(tpLimpezaField);
 		tpLimpezaField.setColumns(10);
 		
-		tpRevisaoField = new JTextField();
-		tpRevisaoField.setBounds(444, 51, 101, 20);
-		contentPanel.add(tpRevisaoField);
+		tpRevisaoField = new JFormattedTextField();
+		tpRevisaoField.setBounds(444, 95, 101, 28);
+		getContentPane().add(tpRevisaoField);
 		tpRevisaoField.setColumns(10);
 		
 		cameraCheckBox = new JCheckBox("Camera de r\u00E9");
-		cameraCheckBox.setBounds(6, 124, 111, 23);
-		contentPanel.add(cameraCheckBox);
+		cameraCheckBox.setBackground(SystemColor.text);
+		cameraCheckBox.setBounds(10, 172, 111, 23);
+		getContentPane().add(cameraCheckBox);
 		
 		direcaoHidraulicaCheckBox = new JCheckBox("Dire\u00E7\u00E3o Hidraulica");
-		direcaoHidraulicaCheckBox.setBounds(119, 124, 131, 23);
-		contentPanel.add(direcaoHidraulicaCheckBox);
+		direcaoHidraulicaCheckBox.setBackground(SystemColor.text);
+		direcaoHidraulicaCheckBox.setBounds(123, 172, 131, 23);
+		getContentPane().add(direcaoHidraulicaCheckBox);
 		
 		mp3CheckBox = new JCheckBox("MP3");
-		mp3CheckBox.setBounds(254, 124, 54, 23);
-		contentPanel.add(mp3CheckBox);
+		mp3CheckBox.setBackground(SystemColor.text);
+		mp3CheckBox.setBounds(254, 172, 54, 23);
+		getContentPane().add(mp3CheckBox);
 		
 		dvdCheckBox = new JCheckBox("DVD");
-		dvdCheckBox.setBounds(310, 124, 60, 23);
-		contentPanel.add(dvdCheckBox);
+		dvdCheckBox.setBackground(SystemColor.text);
+		dvdCheckBox.setBounds(310, 172, 60, 23);
+		getContentPane().add(dvdCheckBox);
 		
 		arCondicionadoCheckBox = new JCheckBox("Ar condicionado");
-		arCondicionadoCheckBox.setBounds(372, 124, 119, 23);
-		contentPanel.add(arCondicionadoCheckBox);
+		arCondicionadoCheckBox.setBackground(SystemColor.text);
+		arCondicionadoCheckBox.setBounds(372, 172, 119, 23);
+		getContentPane().add(arCondicionadoCheckBox);
 		
 		radioCheckBox = new JCheckBox("Radio");
-		radioCheckBox.setBounds(497, 124, 97, 23);
-		contentPanel.add(radioCheckBox);
+		radioCheckBox.setBackground(SystemColor.text);
+		radioCheckBox.setBounds(493, 172, 97, 23);
+		getContentPane().add(radioCheckBox);
 		
 		rdbtnPassageiro = new JRadioButton("Passageiro");
-		rdbtnPassageiro.setBounds(155, 180, 104, 23);
-		contentPanel.add(rdbtnPassageiro);
+		rdbtnPassageiro.setBackground(SystemColor.text);
+		rdbtnPassageiro.setBounds(154, 235, 104, 23);
+		getContentPane().add(rdbtnPassageiro);
 		
 		rdbtnCarga = new JRadioButton("Carga");
-		rdbtnCarga.setBounds(327, 180, 109, 23);
-		contentPanel.add(rdbtnCarga);
+		rdbtnCarga.setBackground(SystemColor.text);
+		rdbtnCarga.setBounds(327, 235, 109, 23);
+		getContentPane().add(rdbtnCarga);
+		
+		ButtonGroup buttonGroup=new ButtonGroup(); 
+		buttonGroup.add(rdbtnCarga);
+		buttonGroup.add(rdbtnPassageiro);
 		
 		JLabel lblTransporte = new JLabel("Transporte");
 		lblTransporte.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-		lblTransporte.setBounds(228, 152, 114, 20);
-		contentPanel.add(lblTransporte);
+		lblTransporte.setBounds(226, 197, 114, 20);
+		getContentPane().add(lblTransporte);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 172, 536, 8);
-		contentPanel.add(separator);
+		separator.setBounds(9, 220, 536, 8);
+		getContentPane().add(separator);
 		
 		JLabel lblOu = new JLabel("Ou");
-		lblOu.setBounds(270, 184, 19, 14);
-		contentPanel.add(lblOu);
+		lblOu.setBounds(277, 239, 19, 14);
+	    getContentPane().add(lblOu);
 		
-		comboBox = new JComboBox();
-		comboBox.setBounds(10, 97, 151, 20);
-		contentPanel.add(comboBox);
+		comboBox = new JComboBox(new String[] {
+				"Manual","Automatico"
+		});
+		comboBox.setBounds(10, 145, 151, 20);
+		getContentPane().add(comboBox);
 		
 		JLabel lblTipoDeCambio = new JLabel("Tipo de cambio");
-		lblTipoDeCambio.setBounds(10, 82, 117, 14);
-		contentPanel.add(lblTipoDeCambio);
+		lblTipoDeCambio.setBounds(10, 130, 117, 14);
+		getContentPane().add(lblTipoDeCambio);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setForeground(Color.BLACK);
-		panel.setBounds(10, 241, 536, 78);
-		contentPanel.add(panel);
-		panel.setLayout(null);
-		panel.setVisible(false);
+	
+		panelCarga = new CategoriaCargaPanel();
+		panelCarga.getPotMotorField().setSize(113, 27);
+		panelCarga.getDesempenhoField().setSize(86, 27);
+		panelCarga.getVolumeTanqueField().setSize(86, 27);
+		panelCarga.getDistEixosField().setSize(153, 27);
+		panelCarga.getQuantCargaField().setSize(153, 27);
+		panelCarga.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelCarga.setForeground(Color.BLACK);
+		panelCarga.setBounds(9, 284, 536, 103);
+		panelCarga.setLayout(null);
+		getContentPane().add(panelCarga);
 		
-		rodasCheckBox = new JCheckBox("Rodas de liga leve");
-		rodasCheckBox.setBounds(6, 7, 133, 23);
-		panel.add(rodasCheckBox);
-		
-		airBargCheckBox = new JCheckBox("Air berg");
-		airBargCheckBox.setBounds(189, 33, 85, 23);
-		panel.add(airBargCheckBox);
-		
-		direcaoAssistidaCheckBox = new JCheckBox("Dire\u00E7\u00E3o assistida");
-		direcaoAssistidaCheckBox.setBounds(189, 7, 133, 23);
-		panel.add(direcaoAssistidaCheckBox);
-		
-		cintoCheckBox = new JCheckBox("Cinto de seguran\u00E7a trazeiro");
-		cintoCheckBox.setBounds(346, 7, 184, 23);
-		panel.add(cintoCheckBox);
-		
-		controleCheckBox = new JCheckBox("Controle de polui\u00E7\u00E3o");
-		controleCheckBox.setBounds(6, 33, 146, 23);
-		panel.add(controleCheckBox);
-		
-		panel.setVisible(true);
-		
-		JLabel lblAcessorios = new JLabel("Acessorios");
-		lblAcessorios.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-		lblAcessorios.setBounds(233, 216, 86, 14);
-		contentPanel.add(lblAcessorios);
+		panelCarga.setVisible(false);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setForeground(Color.DARK_GRAY);
 		separator_1.setBounds(10, 218, 492, -1);
-		contentPanel.add(separator_1);
+		getContentPane().add(separator_1);
 		
 		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(10, 209, 535, 2);
-		contentPanel.add(separator_2);
+		separator_2.setBounds(10, 271, 535, 2);
+		getContentPane().add(separator_2);
 		
 		btnRegistrar = new JButton("Registrar");
 		btnRegistrar.setForeground(Color.WHITE);
 		btnRegistrar.setBackground(Color.BLUE);
-		btnRegistrar.setBounds(10, 334, 89, 23);
-		contentPanel.add(btnRegistrar);
+		btnRegistrar.setBounds(10, 398, 89, 23);
+		getContentPane().add(btnRegistrar);
+		
+		this.mascaraHora(tpRevisaoField);
+		this.mascaraHora(tpLimpezaField);
+		
+		panel_1 = new JPanel();
+		panel_1.setBackground(SystemColor.textHighlight);
+		panel_1.setBounds(0, 0, 590, 69);
+		getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		
+		lblCadastroCategoria = new JLabel("Cadastro Categoria");
+		lblCadastroCategoria.setForeground(SystemColor.text);
+		lblCadastroCategoria.setFont(new Font("Arial", Font.PLAIN, 40));
+		lblCadastroCategoria.setBounds(29, 11, 429, 47);
+		panel_1.add(lblCadastroCategoria);
+		
+		
+		panel = new CategoriaPasasageiroPanel();
+		panel.setBounds(9, 276, 536, 78);
+		getContentPane().add(panel);
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setForeground(Color.BLACK);
+		panel.setLayout(null);
+		panel.setVisible(false);
+		
 	}
+	private void mascaraHora(JFormattedTextField s) {
+
+		try{
+			javax.swing.text.MaskFormatter format_textField4 = new javax.swing.text.MaskFormatter("##:##");
+			format_textField4.install(s);
+		}catch (Exception e){}
+	}
+	
+	
+	public CategoriaCargaPanel getPanelCarga() {
+		return panelCarga;
+	}
+
+
+
+	public CategoriaPasasageiroPanel getPanel() {
+		return panel;
+	}
+
+
 	public JCheckBox getCameraCheckBox() {
 		return cameraCheckBox;
 	}
@@ -200,36 +244,7 @@ public class TelaCadastroCategoria extends JDialog {
 	public void setRadioCheckBox(JCheckBox radioCheckBox) {
 		this.radioCheckBox = radioCheckBox;
 	}
-	public JCheckBox getRodasCheckBox() {
-		return rodasCheckBox;
-	}
-	public void setRodasCheckBox(JCheckBox rodasCheckBox) {
-		this.rodasCheckBox = rodasCheckBox;
-	}
-	public JCheckBox getAirBargCheckBox() {
-		return airBargCheckBox;
-	}
-	public void setAirBargCheckBox(JCheckBox airBargCheckBox) {
-		this.airBargCheckBox = airBargCheckBox;
-	}
-	public JCheckBox getDirecaoAssistidaCheckBox() {
-		return direcaoAssistidaCheckBox;
-	}
-	public void setDirecaoAssistidaCheckBox(JCheckBox direcaoAssistidaCheckBox) {
-		this.direcaoAssistidaCheckBox = direcaoAssistidaCheckBox;
-	}
-	public JCheckBox getCintoCheckBox() {
-		return cintoCheckBox;
-	}
-	public void setCintoCheckBox(JCheckBox cintoCheckBox) {
-		this.cintoCheckBox = cintoCheckBox;
-	}
-	public JCheckBox getControleCheckBox() {
-		return controleCheckBox;
-	}
-	public void setControleCheckBox(JCheckBox controleCheckBox) {
-		this.controleCheckBox = controleCheckBox;
-	}
+	
 	public JRadioButton getRdbtnPassageiro() {
 		return rdbtnPassageiro;
 	}
@@ -248,9 +263,7 @@ public class TelaCadastroCategoria extends JDialog {
 	public void setComboBox(JComboBox comboBox) {
 		this.comboBox = comboBox;
 	}
-	public JPanel getContentPanel() {
-		return contentPanel;
-	}
+	
 	public JButton getBtnRegistrar() {
 		return btnRegistrar;
 	}

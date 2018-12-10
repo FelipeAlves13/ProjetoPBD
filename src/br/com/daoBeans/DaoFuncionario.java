@@ -1,15 +1,12 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import br.com.modelBeans.Categoria_carga;
-import br.com.modelBeans.Funcionario;
-import br.com.modelBeans.Reserva;
+import br.com.exception.DaoException;
+import br.com.modelbeans.Funcionario;
 
 public class DaoFuncionario {
 	//  fazer  as  transações  
@@ -19,7 +16,7 @@ public class DaoFuncionario {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void persist(Funcionario f) {
+	public void persistFuncionario(Funcionario f) {
 		try{
 			this.em = Connection.getEmf().createEntityManager();
 			//instancia  o  EM
@@ -49,15 +46,20 @@ public class DaoFuncionario {
 		}
 	}
 	
-	public List<Funcionario> BuscaFuncionario(String name) {
-		this.em = Connection.getEmf().createEntityManager();
-		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select funcionario from Funcionario funcionario where funcionario.nome like :name");
-		q.setParameter("name","%"+name+"%");
-		List<Funcionario> fs =(List<Funcionario>) q.getResultList();
-		em.getTransaction().commit();
-		em.close(); 
-		return fs;
+	public List<Funcionario> BuscaFuncionario(String name) throws DaoException {
+		try {
+			this.em = Connection.getEmf().createEntityManager();
+			em.getTransaction().begin(); //  abrindo
+			Query q = em.createQuery("select funcionario from Funcionario funcionario where funcionario.nome like :name order by funcionario.nome");
+			q.setParameter("name","%"+name+"%");
+			List<Funcionario> fs =(List<Funcionario>) q.getResultList();
+			em.getTransaction().commit();
+			em.close(); 
+			return fs;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Não a funcionarios cadastrados!!");
+		}
 	}
 	
 	public void remover(Funcionario f) {
@@ -88,7 +90,7 @@ public class DaoFuncionario {
 		}
 	}
 	
-	public Funcionario obterReserva(int id) {
+	public Funcionario obterFuncionario(int id) {
 		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin();
 		Funcionario f = em.find(Funcionario.class, id);
@@ -97,21 +99,26 @@ public class DaoFuncionario {
 		return f;
 	}
 	
-	public boolean buscarLogin(String usuario,String senha) {
-		this.em = Connection.getEmf().createEntityManager();
-		em.getTransaction().begin();
-		Query q = em.createQuery("select funcionario from Funcionario funcionario where funcionario.login=:usuario and funcionario.senha=:senha");
-		q.setParameter("usuario",usuario);
-		q.setParameter("senha",senha);
-	    Funcionario f = new Funcionario();
-		f = (Funcionario)q.getSingleResult();
-		em.getTransaction().commit();
-		em.close();
-		if(f!=null) {
-			return true;
-		}else {
-			return false;
+	public Funcionario buscarLogin(String usuario,String senha) throws DaoException {
+		try {
+			this.em = Connection.getEmf().createEntityManager();
+			em.getTransaction().begin();
+			Query q = em.createQuery("select funcionario from Funcionario funcionario where funcionario.login = :u and funcionario.senha = :s");
+			q.setParameter("u",usuario);
+			q.setParameter("s",senha);
+		    Funcionario f = new Funcionario();
+			f = (Funcionario)q.getSingleResult();
+			em.getTransaction().commit();
+			System.out.print(f.getNome());
+			em.close();
+			return f;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Não a funcionarios cadastrados!!");
+			
+			
 		}
+		
 	}
 
 }

@@ -1,4 +1,4 @@
-package br.com.modelBeans;
+package br.com.modelbeans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

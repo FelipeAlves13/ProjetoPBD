@@ -1,16 +1,13 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.swing.JLabel;
 
-import br.com.modelBeans.Categoria;
-import br.com.modelBeans.Categoria_carga;
-import br.com.modelBeans.Categoria_passageiro;
+import br.com.exception.DaoException;
+import br.com.modelbeans.Categoria;
+
 
 public class DaoCategoria {
 //  fazer  as  transações  
@@ -20,7 +17,7 @@ public class DaoCategoria {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void persist(Categoria c) {
+	public void persistCategoria(Categoria c) {
 		try{
 			this.em = Connection.getEmf().createEntityManager();
 			//instancia  o  EM
@@ -64,15 +61,20 @@ public class DaoCategoria {
 		}
 	}
 	
-	public List<Categoria> BuscaCategoria(String name) {
-		this.em = Connection.getEmf().createEntityManager();
-		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select c from Categoria c where c.nome like :name");
-		q.setParameter("name","%"+name+"%");
-		List<Categoria> c =(List<Categoria>) q.getResultList();
-		em.getTransaction().commit();
-		em.close(); 
-		return c;
+	public List<Categoria> BuscaCategoria(String name) throws DaoException {
+		try {
+			this.em = Connection.getEmf().createEntityManager();
+			em.getTransaction().begin(); //  abrindo
+			Query q = em.createQuery("select c from Categoria c where c.nome like :name order by c.nome");
+			q.setParameter("name","%"+name+"%");
+			List<Categoria> c =(List<Categoria>) q.getResultList();
+			em.getTransaction().commit();
+			em.close(); 
+			return c;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Nao a categorias cadastradas");
+		}
 	}
 	
 	public void remover(Categoria c) {
@@ -88,13 +90,18 @@ public class DaoCategoria {
 		}
 	}
 
-	public Categoria obterCategoria(int id) {
-		this.em = Connection.getEmf().createEntityManager();
-		em.getTransaction().begin();
-		Categoria c = em.find(Categoria.class, id);
-		em.getTransaction().commit();
-		em.close();
-		return c;
+	public Categoria obterCategoria(int id) throws DaoException {
+		try {
+			this.em = Connection.getEmf().createEntityManager();
+			em.getTransaction().begin();
+			Categoria c = em.find(Categoria.class, id);
+			em.getTransaction().commit();
+			em.close();
+			return c;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Nao a categorias cadastradas");
+		}
 	}
 
 

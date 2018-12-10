@@ -1,15 +1,12 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import br.com.modelBeans.Categoria_carga;
-import br.com.modelBeans.Filial;
-import br.com.modelBeans.Reserva;
+import br.com.exception.DaoException;
+import br.com.modelbeans.Filial;
 
 public class DaoFilial {
 //  fazer  as  transações  
@@ -19,7 +16,7 @@ public class DaoFilial {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void persist(Filial f) {
+	public void persistFilial(Filial f) {
 		try{
 			this.em = Connection.getEmf().createEntityManager();
 			//instancia  o  EM
@@ -29,6 +26,7 @@ public class DaoFilial {
 			em.getTransaction().commit(); //  comando  SALVAR
 		} catch  (Exception  e)  {
 			em.getTransaction().rollback();
+			e.printStackTrace();
 		}  finally  {
 			em.close(); //  fevhar  a  conexão
 		}
@@ -50,15 +48,21 @@ public class DaoFilial {
 		}
 	}
 	
-	public List<Filial> BuscaFilial(String name) {
-		this.em = Connection.getEmf().createEntityManager();
-		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select filial from Filial filial where filial.nome like :name ");
-		q.setParameter("name","%"+name+"%");
-		List<Filial> fs =(List<Filial>) q.getResultList();
-		em.getTransaction().commit();
-		em.close(); 
-		return fs;
+	public List<Filial> BuscaFilial(String name) throws DaoException {
+		try {
+			this.em = Connection.getEmf().createEntityManager();
+			em.getTransaction().begin(); //  abrindo
+			Query q = em.createQuery("select filial from Filial filial where filial.nome like :name order by filial.nome");
+			q.setParameter("name","%"+name+"%");
+			List<Filial> fs =(List<Filial>) q.getResultList();
+			em.getTransaction().commit();
+			em.close(); 
+			return fs;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Nao a filiais cadastradas!!");
+		}
+		
 	}
 	public void refresh(Filial f) {
 		try{
@@ -88,13 +92,18 @@ public class DaoFilial {
 		}
 	}
 
-	public Filial obterFilial(int id) {
-		this.em = Connection.getEmf().createEntityManager();
-		em.getTransaction().begin();
-		Filial f = em.find(Filial.class, id);
-		em.getTransaction().commit();
-		em.close();
-		return f;
+	public Filial obterFilial(int id) throws DaoException {
+		try {
+			this.em = Connection.getEmf().createEntityManager();
+			em.getTransaction().begin();
+			Filial f = em.find(Filial.class, id);
+			em.getTransaction().commit();
+			em.close();
+			return f;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Nao a filiais cadastradas!!");
+		}
 	}
 	
 }

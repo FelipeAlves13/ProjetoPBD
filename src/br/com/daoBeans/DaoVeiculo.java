@@ -1,15 +1,11 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import br.com.modelBeans.Categoria_carga;
-import br.com.modelBeans.Reserva;
-import br.com.modelBeans.Veiculo;
+import br.com.modelbeans.Veiculo;
 
 public class DaoVeiculo {
 	//  fazer  as  transações  
@@ -19,7 +15,7 @@ public class DaoVeiculo {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void persist(Veiculo v) {
+	public void persistVeiculo(Veiculo v) {
 		try{
 			this.em = Connection.getEmf().createEntityManager();
 			//instancia  o  EM
@@ -29,6 +25,7 @@ public class DaoVeiculo {
 			em.getTransaction().commit(); //  comando  SALVAR
 		} catch  (Exception  e)  {
 			em.getTransaction().rollback();
+			e.printStackTrace();
 		}  finally  {
 			em.close(); //  fevhar  a  conexão
 		}
@@ -63,10 +60,21 @@ public class DaoVeiculo {
 		}
 	}
 	
-	public List<Veiculo> BuscaVeiculo() {
+	public List<Veiculo> BuscaVeiculo(String modelo) {
 		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select veiculo from Veiculo veiculo ");
+		Query q = em.createQuery("select veiculo from Veiculo veiculo where veiculo.modelo like :modelo order by veiculo.modelo ");
+		q.setParameter("modelo","%"+modelo+"%");
+		List<Veiculo> v =(List<Veiculo>) q.getResultList();
+		em.getTransaction().commit();
+		em.close(); 
+		return v;
+	}
+	public List<Veiculo> BuscaVeiculosPorCategoria(String categoria) {
+		this.em = Connection.getEmf().createEntityManager();
+		em.getTransaction().begin(); //  abrindo
+		Query q = em.createQuery("select veiculo from Veiculo veiculo, Categoria categoria where veiculo.cat = categoria and categoria.nome like :categoria ");
+		q.setParameter("categoria","%"+categoria+"%");
 		List<Veiculo> v =(List<Veiculo>) q.getResultList();
 		em.getTransaction().commit();
 		em.close(); 

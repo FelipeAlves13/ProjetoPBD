@@ -1,4 +1,4 @@
-package br.com.modelBeans;
+package br.com.modelbeans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +20,7 @@ public class Filial {
 	@Column(length=100,nullable=false)
 	private String nome;
 	@ManyToOne
-	@JoinColumn(name="id_endereco")
+	@JoinColumn(name="id_endereco",nullable=false)
 	private Endereco endereco;
 	
 	public int getId() {

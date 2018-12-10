@@ -1,15 +1,12 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import br.com.modelBeans.Categoria_carga;
-import br.com.modelBeans.Endereco;
-import br.com.modelBeans.Reserva;
+import br.com.exception.DaoException;
+import br.com.modelbeans.Reserva;
 
 public class DaoReserva {
 	//  fazer  as  transações  
@@ -19,7 +16,7 @@ public class DaoReserva {
 		
 	}
 	
-	public void persist(Reserva r) {
+	public void persistReserva(Reserva r) {
 		try{
 			this.em =Connection.getEmf().createEntityManager();
 			//instancia  o  EM
@@ -63,15 +60,21 @@ public class DaoReserva {
 		}
 	}
 	
-	public List<Reserva> BuscaReserva(String name) {
-		this.em =Connection.getEmf().createEntityManager();
-		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select reserva from Reserva reserva, Pessoa p where reserva.id_pessoa=p.id p.nome like :name");
-		q.setParameter("name",name);
-		List<Reserva> rs =(List<Reserva>) q.getResultList();
-		em.getTransaction().commit();
-		em.close(); 
-		return rs;
+	public List<Reserva> BuscaReserva(String name) throws DaoException {
+		try {
+			this.em =Connection.getEmf().createEntityManager();
+			em.getTransaction().begin(); //  abrindo
+			Query q = em.createQuery("select reserva from Reserva reserva, Pessoa p where reserva.pessoa = p and p.nome like :name order by p.nome");
+			q.setParameter("name","%"+name+"%");
+			List<Reserva> rs =(List<Reserva>) q.getResultList();
+			em.getTransaction().commit();
+			em.close(); 
+			return rs;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Erro!! não a reservas!!");
+		}
+		
 	}
 	
 	public void remover(Reserva r) {

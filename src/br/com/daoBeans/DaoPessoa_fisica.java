@@ -1,16 +1,11 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import br.com.modelBeans.Categoria_carga;
-import br.com.modelBeans.Endereco;
-import br.com.modelBeans.Pessoa;
-import br.com.modelBeans.Pessoa_fisica;
+import br.com.modelbeans.Pessoa_fisica;
 
 public class DaoPessoa_fisica {
 
@@ -31,7 +26,7 @@ public class DaoPessoa_fisica {
 	}
 	
 	
-	public void persist(Pessoa_fisica pf) {
+	public void persistPessoaFisica(Pessoa_fisica pf) {
 		try{
 			this.em =Connection.getEmf().createEntityManager();
 			//instancia  o  EM
@@ -97,5 +92,14 @@ public class DaoPessoa_fisica {
 			em.close(); //  fevhar  a  conexão
 		}
 	}
-
+	public Pessoa_fisica buscarIdDoUltimoDado() {
+		this.em = Connection.getEmf().createEntityManager();
+		em.getTransaction().begin();
+		Query q = em.createQuery("select pf from Pessoa_fisica pf order by pf.id DESC");
+		List<Pessoa_fisica> pfs =(List<Pessoa_fisica>) q.getResultList();
+		em.getTransaction().commit();
+		em.close();
+		Pessoa_fisica pf = pfs.get(0);
+		return pf;
+	}
 }

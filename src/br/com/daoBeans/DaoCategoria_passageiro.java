@@ -1,15 +1,11 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import br.com.modelBeans.Categoria_carga;
-import br.com.modelBeans.Categoria_passageiro;
-import br.com.modelBeans.Reserva;
+import br.com.modelbeans.Categoria_passageiro;
 
 public class DaoCategoria_passageiro {
 	//  fazer  as  transações  
@@ -96,6 +92,7 @@ public class DaoCategoria_passageiro {
 	}
 	
 	public Categoria_passageiro buscarIdDoUltimoDado() {
+		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin();
 		Query q = em.createQuery("select cp from Categoria_passageiro cp order by cp.id DESC");
 		List<Categoria_passageiro> cps =(List<Categoria_passageiro>) q.getResultList();

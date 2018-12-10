@@ -1,74 +1,101 @@
 package br.com.view;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Color;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JSeparator;
-import java.awt.Color;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
-public class TelaLogin1 extends JDialog {
+public class TelaLogin1 extends JFrame {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField loginField,senhaField;
-	private JButton logarButton, registrarButton;
+	private JTextField loginField;
+	private JPasswordField senhaField;
+	private JButton logarButton, registrarButton,btnSair;
 	private JComboBox comboBox;
 	
 	public TelaLogin1() {
-		setBounds(100, 100, 250, 227);
+		
+		setUndecorated(true);
+		setBounds(100, 100, 384, 382);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(Color.GRAY);
+		contentPanel.setBackground(SystemColor.text);
 		contentPanel.setBorder(null);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setForeground(Color.WHITE);
-		lblLogin.setBounds(29, 49, 46, 14);
+		lblLogin.setFont(new Font("Arial", Font.PLAIN, 15));
+		lblLogin.setBackground(SystemColor.activeCaptionText);
+		lblLogin.setForeground(SystemColor.desktop);
+		lblLogin.setBounds(84, 164, 46, 21);
 		contentPanel.add(lblLogin);
 		
 		loginField = new JTextField();
-		loginField.setBounds(67, 46, 138, 20);
+		loginField.setBounds(131, 162, 166, 27);
 		contentPanel.add(loginField);
 		loginField.setColumns(10);
 		
-		senhaField = new JTextField();
+		senhaField = new JPasswordField();
 		senhaField.setColumns(10);
-		senhaField.setBounds(67, 74, 138, 20);
+		senhaField.setBounds(131, 200, 166, 27);
 		contentPanel.add(senhaField);
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setForeground(Color.WHITE);
-		lblSenha.setBounds(29, 74, 46, 14);
+		lblSenha.setFont(new Font("Arial", Font.PLAIN, 15));
+		lblSenha.setForeground(SystemColor.desktop);
+		lblSenha.setBounds(84, 205, 46, 14);
 		contentPanel.add(lblSenha);
 		
 		logarButton = new JButton("Logar");
+		
 		logarButton.setForeground(Color.WHITE);
-		logarButton.setBackground(Color.GREEN);
-		logarButton.setBounds(67, 105, 113, 23);
+		logarButton.setBackground(SystemColor.textHighlight);
+		logarButton.setBounds(84, 238, 213, 38);
 		contentPanel.add(logarButton);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(29, 139, 195, 2);
+		separator.setBounds(10, 287, 358, 2);
 		contentPanel.add(separator);
 		
 		registrarButton = new JButton("Registrar");
 		registrarButton.setForeground(Color.WHITE);
-		registrarButton.setBackground(Color.BLUE);
-		registrarButton.setBounds(67, 152, 113, 23);
+		registrarButton.setBackground(SystemColor.textHighlight);
+		registrarButton.setBounds(84, 300, 213, 38);
 		contentPanel.add(registrarButton);
 		
 		comboBox = new JComboBox(new String[] {
 				"Cliente","Funcionario"
 		});
-		comboBox.setBounds(29, 18, 138, 20);
+		comboBox.setBounds(84, 126, 138, 27);
 		contentPanel.add(comboBox);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(SystemColor.textHighlight);
+		panel.setBounds(0, 0, 388, 122);
+		contentPanel.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("imagens\\logomarca.png"));
+		lblNewLabel.setBounds(88, 0, 206, 122);
+		panel.add(lblNewLabel);
+		
+		btnSair = new JButton("Sair");
+		btnSair.setBounds(285, 348, 89, 23);
+		contentPanel.add(btnSair);
 		
 		setVisible(true);
 	}
@@ -77,7 +104,7 @@ public class TelaLogin1 extends JDialog {
 		return loginField;
 	}
 
-	public JTextField getSenhaField() {
+	public JPasswordField getSenhaField() {
 		return senhaField;
 	}
 
@@ -91,6 +118,10 @@ public class TelaLogin1 extends JDialog {
 
 	public JComboBox getComboBox() {
 		return comboBox;
+	}
+
+	public JButton getBtnSair() {
+		return btnSair;
 	}
 	
 	

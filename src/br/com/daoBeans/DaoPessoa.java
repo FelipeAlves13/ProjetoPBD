@@ -1,15 +1,12 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import br.com.modelBeans.Categoria_carga;
-import br.com.modelBeans.Endereco;
-import br.com.modelBeans.Pessoa;
+import br.com.exception.DaoException;
+import br.com.modelbeans.Pessoa;
 
 public class DaoPessoa {
 	//private  EntityManagerFactory  emf  ;
@@ -41,7 +38,7 @@ public class DaoPessoa {
 		}
 	}
 	
-	public void persist(Pessoa p) {
+	public void persistPessoa(Pessoa p) {
 		try{
 			
 			this.em = Connection.getEmf().createEntityManager();
@@ -70,15 +67,21 @@ public class DaoPessoa {
 		}
 	}
 	
-	public List<Pessoa> BuscaPessoa(String name) {
-		this.em = Connection.getEmf().createEntityManager();
-		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select pessoa from Pessoa pessoa where pessoa.nome like :name");
-		q.setParameter("name","%"+name+"%");
-		List<Pessoa> p = q.getResultList();
-		em.getTransaction().commit();
-		em.close(); 
-		return p;
+	public List<Pessoa> BuscaPessoa(String name) throws DaoException {
+		try {
+			this.em = Connection.getEmf().createEntityManager();
+			em.getTransaction().begin(); //  abrindo
+			Query q = em.createQuery("select pessoa from Pessoa pessoa where pessoa.nome like :name order by pessoa.nome");
+			q.setParameter("name","%"+name+"%");
+			List<Pessoa> p = q.getResultList();
+			em.getTransaction().commit();
+			em.close(); 
+			return p;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Erro!!Não Existem clientes");
+		}
+		
 	}
 	
 	public void remove(Pessoa p) {
@@ -91,6 +94,24 @@ public class DaoPessoa {
 			em.getTransaction().rollback();
 		}  finally  {
 			em.close(); //  fevhar  a  conexão
+		}
+	}
+	public Pessoa buscarLogin(String usuario,String senha) throws DaoException {
+		try {
+			this.em = Connection.getEmf().createEntityManager();
+			em.getTransaction().begin();
+			Query q = em.createQuery("select p from Pessoa p where p.login = :u and p.senha = :s");
+			q.setParameter("u",usuario);
+			q.setParameter("s",senha);
+			Pessoa p = new Pessoa();
+			p = (Pessoa)q.getSingleResult();
+			em.getTransaction().commit();
+			//System.out.print(p.getNome());
+			em.close();
+			return p;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Erro!!Usuario ou senha esta incorreto!!");
 		}
 	}
 }

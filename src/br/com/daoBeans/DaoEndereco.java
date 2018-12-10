@@ -1,4 +1,4 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 
 
@@ -6,12 +6,9 @@ package br.com.daoBeans;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import br.com.modelBeans.Categoria_carga;
-import br.com.modelBeans.Endereco;
+import br.com.modelbeans.Endereco;
 
 public class DaoEndereco {
 	
@@ -29,7 +26,7 @@ public class DaoEndereco {
 		return end;
 	}
 	
-	public void persist(Endereco end) {
+	public void persistEndereco(Endereco end) {
 		try{
 			this.em = Connection.getEmf().createEntityManager();
 			em.getTransaction().begin(); //  abrindo  a  conexão
@@ -93,6 +90,15 @@ public class DaoEndereco {
 			em.close(); //  fevhar  a  conexão
 		}
 	}
-	
+	public Endereco buscarIdDoUltimoDado() {
+		this.em = Connection.getEmf().createEntityManager();
+		em.getTransaction().begin();
+		Query q = em.createQuery("select e from Endereco e order by e.id DESC");
+		List<Endereco> es =(List<Endereco>) q.getResultList();
+		em.getTransaction().commit();
+		em.close();
+		Endereco e = es.get(0);
+		return e;
+	}
 	
 }

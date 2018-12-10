@@ -1,4 +1,4 @@
-package br.com.modelBeans;
+package br.com.modelbeans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +24,10 @@ public class Pessoa_juridica {
 		return id;
 	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getCnpj() {
 		return cnpj;
 	}

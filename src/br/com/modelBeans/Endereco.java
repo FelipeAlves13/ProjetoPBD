@@ -1,4 +1,4 @@
-package br.com.modelBeans;
+package br.com.modelbeans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,14 +15,18 @@ public class Endereco {
 	@Id
 	@GeneratedValue(strategy =GenerationType.SEQUENCE,generator="end_seq")
 	private int id;
-	@Column(nullable=true)
+	@Column(nullable=false)
 	private String telefone;
-	@Column(length=2,nullable=true)
+	@Column(length=2,nullable=false)
 	private String uf;
-	@Column(length=40,nullable=true)
+	@Column(length=40,nullable=false)
 	private String cidade;
-	@Column(length=12,nullable=true)
+	@Column(length=12,nullable=false)
 	private String cep;
+	@Column(nullable=false)
+	private String rua;
+	@Column(nullable=false)
+	private String bairro;
 	
 	public Endereco() {
 		
@@ -34,8 +38,24 @@ public class Endereco {
 		this.cidade=cidade;
 		this.cep=cep;
 	}
-	
-	
+
+
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getRua() {
+		return rua;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
 	public int getId() {
 		return id;
 	}

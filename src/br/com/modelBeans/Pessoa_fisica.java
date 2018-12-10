@@ -1,4 +1,4 @@
-package br.com.modelBeans;
+package br.com.modelbeans;
 
 import java.util.Date;
 
@@ -30,6 +30,12 @@ public class Pessoa_fisica {
 		return id;
 	}
 	
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	public String getCpf() {
 		return cpf;
 	}

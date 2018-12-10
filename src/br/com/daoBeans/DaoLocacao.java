@@ -1,15 +1,11 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import br.com.modelBeans.Categoria_carga;
-import br.com.modelBeans.Locacao;
-import br.com.modelBeans.Reserva;
+import br.com.modelbeans.Locacao;
 
 public class DaoLocacao {
 	//  fazer  as  transações  
@@ -19,7 +15,7 @@ public class DaoLocacao {
 		
 	}
 	
-	public void persist(Locacao l) {
+	public void persistLocacao(Locacao l) {
 		try{
 			this.em = Connection.getEmf().createEntityManager();
 			//instancia  o  EM
@@ -29,6 +25,7 @@ public class DaoLocacao {
 			em.getTransaction().commit(); //  comando  SALVAR
 		} catch  (Exception  e)  {
 			em.getTransaction().rollback();
+			e.printStackTrace();
 		}  finally  {
 			em.close(); //  fevhar  a  conexão
 		}
@@ -66,7 +63,7 @@ public class DaoLocacao {
 	public List<Locacao> BuscaLocacao(String name) {
 		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select locacao from Locacao locacao, Pessoa p where locacao.id_pessoa=p.id and p.nome like :name");
+		Query q = em.createQuery("select locacao from Locacao locacao, Pessoa p where locacao.pessoa=p and p.nome like :name order by p.nome");
 		q.setParameter("name","%"+name+"%");
 		List<Locacao> ls =(List<Locacao>) q.getResultList();
 		em.getTransaction().commit();

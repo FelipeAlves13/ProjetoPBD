@@ -1,4 +1,4 @@
-package br.com.modelBeans;
+package br.com.modelbeans;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -31,7 +31,7 @@ public class Locacao {
 	@Column(nullable=false)
 	@Temporal(TemporalType.TIME)
 	private Date hora;
-	@Column(nullable=false)
+	@Column(nullable=true)
 	@Temporal(TemporalType.TIME)
 	private Date hora_entrega;
 	@Column(nullable=false)
@@ -39,14 +39,18 @@ public class Locacao {
 	private Date data_origem;
 	@Temporal(TemporalType.DATE)
 	private Date data_entrega;
+	@Column(nullable=false)
+	private double valor_Pago;
+	@Column(nullable=true)
+	private double valo_total;
 	@ManyToOne
-	@JoinColumn(name="id_pessoa")
+	@JoinColumn(name="id_pessoa",nullable=false)
 	private Pessoa pessoa;
 	@ManyToOne
-	@JoinColumn(name="id_pessoa_f")
+	@JoinColumn(name="id_motorista",nullable=false)
 	private Pessoa motorista;
 	@ManyToOne
-	@JoinColumn(name="id_veiculo")
+	@JoinColumn(name="id_veiculo",nullable=false)
 	private Veiculo veiculo;
 	@ManyToOne
 	@JoinColumn(name="id_funcionario")
@@ -55,7 +59,7 @@ public class Locacao {
 	@JoinColumn(name="id_filial_entrega")
 	private Filial filial_entrega;
 	@ManyToOne
-	@JoinColumn(name="id_filial_origem")
+	@JoinColumn(name="id_filial_origem",nullable=false)
 	private Filial filial_origem;
 	
 	
@@ -63,6 +67,32 @@ public class Locacao {
 		return id;
 	}
 	
+	
+	
+	public void setValor_Pago(double valor_Pago) {
+		this.valor_Pago = valor_Pago;
+	}
+
+
+
+	public void setValo_total(double valo_total) {
+		this.valo_total = valo_total;
+	}
+
+
+
+	public double getValor_Pago() {
+		return valor_Pago;
+	}
+
+
+
+	public double getValo_total() {
+		return valo_total;
+	}
+
+
+
 	public boolean isKm_livre() {
 		return km_livre;
 	}

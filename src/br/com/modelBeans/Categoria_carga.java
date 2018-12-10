@@ -1,4 +1,4 @@
-package br.com.modelBeans;
+package br.com.modelbeans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,13 +16,13 @@ public class Categoria_carga {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="catc_seq")
 	private int id;
 	@Column(nullable=false)
-	private int capacidade_carga;
+	private double capacidade_carga;
 	@Column(length=30,nullable=false)
-	private String embreagem;
+	private boolean embreagem;
 	@Column(length=30,nullable=false)
-	private String desempenho;
+	private double desempenho;
 	@Column(length=30,nullable=false)
-	private String potencia_do_motor;
+	private double potencia_do_motor;
 	@Column(nullable=false)
 	private double distância_eixos;
 	@Column(nullable=false)
@@ -32,38 +32,60 @@ public class Categoria_carga {
 		return id;
 	}
 	
-	public int getCapacidade_carga() {
-		return capacidade_carga;
-	}
+	
 	
 	public void setCapacidade_carga(int capacidade_carga) {
 		this.capacidade_carga = capacidade_carga;
 	} 
 	
-	public String getEmbreagem() {
+	
+	
+	public boolean isEmbreagem() {
 		return embreagem;
 	}
-	
-	public void setEmbreagem(String embreagem) {
+
+	public void setEmbreagem(boolean embreagem) {
 		this.embreagem = embreagem;
 	}
+
 	
-	public String getDesempenho() {
-		return desempenho;
+	public void setCapacidade_carga(double capacidade_carga) {
+		this.capacidade_carga = capacidade_carga;
 	}
-	
-	public void setDesempenho(String desempenho) {
+
+
+
+	public void setDesempenho(double desempenho) {
 		this.desempenho = desempenho;
 	}
+
+
+
+	public double getCapacidade_carga() {
+		return capacidade_carga;
+	}
+
+
+
+	public double getDesempenho() {
+		return desempenho;
+	}
+
+
+
 	
-	public String getPotencia_do_motor() {
+	public double getPotencia_do_motor() {
 		return potencia_do_motor;
 	}
-	
-	public void setPotencia_do_motor(String potencia_do_motor) {
+
+
+
+	public void setPotencia_do_motor(double potencia_do_motor) {
 		this.potencia_do_motor = potencia_do_motor;
 	}
-	
+
+
+
 	public double getDistância_eixos() {
 		return distância_eixos;
 	}

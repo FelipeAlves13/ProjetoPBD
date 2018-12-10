@@ -1,220 +1,256 @@
 package br.com.view;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JPasswordField;
-import javax.swing.JSeparator;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class TelaCadastroCliente extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField nomeField,codigoField,loginField,ruaField,bairroField,inscField,cidadeField;
-	private JFormattedTextField nascField,cpfouCnpjField,telefoneField,cepField;
+	private JFormattedTextField nascField,cpfField,cnpjField,telefoneField,cepField,vencHabField;
 	private JComboBox cpfouCnpjBox,sexoBox,ufBox ;
 	private JPasswordField passwordField;
-	private JButton btnRegistrar,btnVoltar;
-	private JLabel lblInscrioEstadual;
+	private JButton btnRegistrar;
+	private JLabel lblInscrioEstadual,lblDaraDeVencimentohabillitao, lblNDaHabilitao;
+
+	private JTextField nHabField;
+	private JPanel panel;
+	private JLabel lblCadastroDoCliente;
 
 	
 	public TelaCadastroCliente() {
-		setBounds(100, 100, 405, 416);
+		setBounds(100, 100, 514, 480);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(Color.LIGHT_GRAY);
+		contentPanel.setBackground(SystemColor.text);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		nomeField = new JTextField();
-		nomeField.setBounds(10, 65, 240, 20);
+		nomeField.setBounds(10, 116, 240, 27);
 		contentPanel.add(nomeField);
 		nomeField.setColumns(10);
 		
 		
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(10, 48, 46, 14);
+		lblNome.setBounds(10, 97, 46, 14);
 		contentPanel.add(lblNome);
 		
 		
 		JLabel lblDataDeNascimento = new JLabel("Data de nascimento");
-		lblDataDeNascimento.setBounds(270, 48, 154, 14);
+		lblDataDeNascimento.setBounds(270, 97, 154, 14);
 		contentPanel.add(lblDataDeNascimento);
 		
 		
 		nascField = new JFormattedTextField();
-		nascField.setBounds(270, 65, 106, 20);
+		nascField.setBounds(269, 116, 106, 27);
 		contentPanel.add(nascField);
 		nascField.setColumns(10);
 		
 		
-		cpfouCnpjField = new JFormattedTextField();
-		cpfouCnpjField.setBounds(10, 120, 127, 20);
-		contentPanel.add(cpfouCnpjField);
-		cpfouCnpjField.setColumns(10);
+		cpfField = new JFormattedTextField();
+		cpfField.setBounds(10, 182, 127, 27);
+		contentPanel.add(cpfField);
+		cpfField.setColumns(10);
 		
-		
+		cnpjField= new JFormattedTextField();
+		cnpjField.setBounds(10, 182, 127, 27);
+		contentPanel.add(cnpjField);
+		cnpjField.setColumns(10);
+		cnpjField.setVisible(false);
 		cpfouCnpjBox = new JComboBox();
 		cpfouCnpjBox.setModel(new DefaultComboBoxModel(new String[] {"CPF", "CNPJ"}));
-		cpfouCnpjBox.setBounds(10, 96, 86, 20);
+		cpfouCnpjBox.setBounds(10, 154, 86, 27);
 		contentPanel.add(cpfouCnpjBox);
 		
 		
 		JLabel lblSexo = new JLabel("Sexo");
-		lblSexo.setBounds(147, 102, 46, 14);
+		lblSexo.setBounds(147, 167, 46, 14);
 		contentPanel.add(lblSexo);
 		
 		
 		sexoBox = new JComboBox();
 		sexoBox.setModel(new DefaultComboBoxModel(new String[] {"M", "F"}));
-		sexoBox.setBounds(147, 120, 103, 20);
+		sexoBox.setBounds(147, 182, 103, 27);
 		contentPanel.add(sexoBox);
 		
 		
 		JLabel lblCodigo = new JLabel("Codigo");
-		lblCodigo.setBounds(270, 102, 46, 14);
+		lblCodigo.setBounds(385, 97, 46, 14);
 		contentPanel.add(lblCodigo);
 		
 		
 		codigoField = new JTextField();
-		codigoField.setBounds(270, 120, 105, 20);
+		codigoField.setBounds(385, 116, 105, 27);
 		contentPanel.add(codigoField);
 		codigoField.setColumns(10);
 		
 		
 		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setBounds(10, 151, 46, 14);
+		lblLogin.setBounds(270, 167, 46, 14);
 		contentPanel.add(lblLogin);
 		
 		loginField = new JTextField();
-		loginField.setBounds(10, 165, 127, 20);
+		loginField.setBounds(269, 182, 106, 27);
 		contentPanel.add(loginField);
 		loginField.setColumns(10);
 		
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(147, 151, 46, 14);
+		lblSenha.setBounds(385, 167, 46, 14);
 		contentPanel.add(lblSenha);
 				
 		passwordField = new JPasswordField();
-		passwordField.setBounds(147, 165, 103, 20);
+		passwordField.setBounds(385, 182, 103, 27);
 		contentPanel.add(passwordField);
 		
 		JLabel lblEndereco = new JLabel("Endereco");
 		lblEndereco.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblEndereco.setBounds(10, 198, 86, 14);
+		lblEndereco.setBounds(10, 269, 86, 14);
 		contentPanel.add(lblEndereco);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setForeground(Color.BLACK);
-		separator_1.setBounds(10, 212, 365, 2);
+		separator_1.setBounds(11, 287, 480, 2);
 		contentPanel.add(separator_1);
 		
 		JLabel lblUf = new JLabel("UF");
-		lblUf.setBounds(10, 223, 46, 14);
+		lblUf.setBounds(10, 300, 46, 14);
 		contentPanel.add(lblUf);
 		
-		ufBox = new JComboBox();
-		ufBox.setBounds(10, 236, 57, 20);
+		ufBox = new JComboBox(new String[] {
+				"AL","BA","CE","MA","PB","PE","PI","RN","SE"
+						
+		});
+		ufBox.setBounds(10, 316, 57, 27);
 		contentPanel.add(ufBox);
 		
 		cidadeField = new JTextField(10);
-		cidadeField.setBounds(77, 236, 166, 20);
+		cidadeField.setBounds(77, 316, 166, 27);
 		contentPanel.add(cidadeField);
 		
 		JLabel lblCidade = new JLabel("Cidade");
-		lblCidade.setBounds(77, 223, 46, 14);
+		lblCidade.setBounds(77, 300, 46, 14);
 		contentPanel.add(lblCidade);
 		
 		cepField = new JFormattedTextField();
-		cepField.setBounds(279, 236, 104, 20);
+		cepField.setBounds(253, 316, 104, 27);
 		contentPanel.add(cepField);
 		cepField.setColumns(10);
 		
 		JLabel lblCep = new JLabel("CEP");
-		lblCep.setBounds(280, 223, 46, 14);
+		lblCep.setBounds(253, 300, 46, 14);
 		contentPanel.add(lblCep);
 		
 		JLabel lblTelefone = new JLabel("Telefone");
-		lblTelefone.setBounds(280, 267, 96, 14);
+		lblTelefone.setBounds(367, 300, 96, 14);
 		contentPanel.add(lblTelefone);
 		
 		telefoneField = new JFormattedTextField();
-		telefoneField.setBounds(278, 279, 105, 20);
+		telefoneField.setBounds(367, 316, 105, 27);
 		contentPanel.add(telefoneField);
 		telefoneField.setColumns(10);
 		
-		JLabel lblCliente = new JLabel("Cliente");
-		lblCliente.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblCliente.setBounds(10, 22, 75, 14);
-		contentPanel.add(lblCliente);
-		
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setForeground(Color.BLACK);
-		separator_2.setBounds(10, 36, 365, 2);
-		contentPanel.add(separator_2);
-		
 		JLabel lblRua = new JLabel("Rua");
-		lblRua.setBounds(10, 267, 46, 14);
+		lblRua.setBounds(10, 354, 46, 14);
 		contentPanel.add(lblRua);
 		
 		ruaField = new JTextField();
-		ruaField.setBounds(10, 279, 233, 20);
+		ruaField.setBounds(10, 370, 233, 27);
 		contentPanel.add(ruaField);
 		ruaField.setColumns(10);
 		
 		JLabel lblBairro = new JLabel("Bairro");
-		lblBairro.setBounds(10, 310, 46, 14);
+		lblBairro.setBounds(253, 354, 46, 14);
 		contentPanel.add(lblBairro);
 		
 		bairroField = new JTextField();
-		bairroField.setBounds(10, 322, 233, 20);
+		bairroField.setBounds(253, 370, 233, 27);
 		contentPanel.add(bairroField);
 		bairroField.setColumns(10);
 		
 		lblInscrioEstadual = new JLabel("inscri\u00E7\u00E3o estadual");
-		lblInscrioEstadual.setBounds(270, 151, 109, 14);
+		lblInscrioEstadual.setBounds(10, 219, 109, 14);
 		contentPanel.add(lblInscrioEstadual);
 		lblInscrioEstadual.setVisible(false);
 		
 		inscField = new JTextField();
-		inscField.setBounds(270, 165, 105, 20);
+		inscField.setBounds(10, 235, 105, 27);
 		contentPanel.add(inscField);
 		inscField.setColumns(10);
 		inscField.setVisible(false);
 		
-		btnRegistrar = new JButton("Registrar");
-		btnRegistrar.setBackground(Color.BLUE);
+		btnRegistrar = new JButton("Salvar");
+		btnRegistrar.setBackground(SystemColor.textHighlight);
 		btnRegistrar.setForeground(Color.WHITE);
-		btnRegistrar.setBounds(10, 353, 89, 23);
+		btnRegistrar.setBounds(10, 408, 89, 23);
 		contentPanel.add(btnRegistrar);
 		
-		btnVoltar = new JButton("Voltar");
-		btnVoltar.setForeground(Color.WHITE);
-		btnVoltar.setBackground(Color.GREEN);
-		btnVoltar.setBounds(104, 353, 89, 23);
-		contentPanel.add(btnVoltar);
+		lblDaraDeVencimentohabillitao = new JLabel("Dara de vencimento(habillita\u00E7\u00E3o)");
+		lblDaraDeVencimentohabillitao.setBounds(10, 219, 166, 14);
+		contentPanel.add(lblDaraDeVencimentohabillitao);
+		
+		vencHabField = new JFormattedTextField();
+		vencHabField.setBounds(10, 235, 166, 27);
+		contentPanel.add(vencHabField);
+		vencHabField.setColumns(10);
+		
+		lblNDaHabilitao = new JLabel("N\u00BA da habilita\u00E7\u00E3o");
+		lblNDaHabilitao.setBounds(186, 220, 113, 14);
+		contentPanel.add(lblNDaHabilitao);
+		lblNDaHabilitao.setVisible(true);
+		
+		nHabField = new JTextField();
+		nHabField.setBounds(186, 235, 86, 27);
+		contentPanel.add(nHabField);
+		nHabField.setColumns(10);
+		
+		
+		panel = new JPanel();
+		panel.setBackground(SystemColor.textHighlight);
+		panel.setBounds(0, 0, 498, 86);
+		contentPanel.add(panel);
+		panel.setLayout(null);
+		
+		lblCadastroDoCliente = new JLabel("Cadastro do cliente");
+		lblCadastroDoCliente.setFont(new Font("Arial", Font.PLAIN, 40));
+		lblCadastroDoCliente.setForeground(SystemColor.text);
+		lblCadastroDoCliente.setBounds(10, 11, 439, 64);
+		panel.add(lblCadastroDoCliente);
 		
 		this.mascaraData();
 		this.mascaraTelefone();
 		this.mascaraCPF();
 		this.mascaraCep();
+		this.mascaraCNPJ();
+		this.mascaraDataVenc();
 	}
 	private void mascaraCPF() {
 
 		try{
 			javax.swing.text.MaskFormatter format_textField4 = new javax.swing.text.MaskFormatter("###.###.###-##");
-			format_textField4.install(cpfouCnpjField);
+			format_textField4.install(cpfField);
+		}catch (Exception e){}
+	}
+	private void mascaraCNPJ() {
+
+		try{
+			javax.swing.text.MaskFormatter format_textField4 = new javax.swing.text.MaskFormatter("##.###.###/####-##");
+			format_textField4.install(cnpjField);
 		}catch (Exception e){}
 	}
 	private void mascaraCep() {
@@ -227,6 +263,12 @@ public class TelaCadastroCliente extends JDialog {
 		try{
 			javax.swing.text.MaskFormatter format_textField4 = new javax.swing.text.MaskFormatter("##/##/####");
 			format_textField4.install(nascField);
+		}catch (Exception e){}
+	}
+	private void mascaraDataVenc() {
+		try{
+			javax.swing.text.MaskFormatter format_textField4 = new javax.swing.text.MaskFormatter("##/##/####");
+			format_textField4.install(vencHabField);
 		}catch (Exception e){}
 	}
 	private void mascaraTelefone() {
@@ -244,14 +286,29 @@ public class TelaCadastroCliente extends JDialog {
 		return nascField;
 	}
 
-	public JTextField getCpfouCnpjField() {
-		return cpfouCnpjField;
+	public JFormattedTextField getCpfouCnpjField() {
+		return cpfField;
 	}
 
 	public JTextField getCodigoField() {
 		return codigoField;
 	}
-
+	
+	public JLabel getLblInscrioEstadual() {
+		return lblInscrioEstadual;
+	}
+	public JLabel getLblDaraDeVencimentohabillitao() {
+		return lblDaraDeVencimentohabillitao;
+	}
+	public JLabel getLblNDaHabilitao() {
+		return lblNDaHabilitao;
+	}
+	public JFormattedTextField getVencHabField() {
+		return vencHabField;
+	}
+	public JTextField getnHabField() {
+		return nHabField;
+	}
 	public JTextField getLoginField() {
 		return loginField;
 	}
@@ -296,13 +353,14 @@ public class TelaCadastroCliente extends JDialog {
 		return btnRegistrar;
 	}
 
-	public JButton getBtnVoltar() {
-		return btnVoltar;
-	}
+	
 
 	public JTextField getCidadeField() {
 		return cidadeField;
 	}
-	
+	public JFormattedTextField getCnpjField() {
+		return cnpjField;
+	}
+
 	
 }

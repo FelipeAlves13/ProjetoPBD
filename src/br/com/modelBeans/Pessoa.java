@@ -1,4 +1,4 @@
-package br.com.modelBeans;
+package br.com.modelbeans;
 
 import java.util.Date;
 
@@ -31,21 +31,21 @@ public class Pessoa {
 	private String login;
 	@Column(nullable=false)
 	private String senha;
-	@Column(nullable=false,length=1)
+	@Column(nullable=false,length=2)
 	private String sexo;
 	@Column(nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date data_nasc;
 	@Column(unique= true,nullable=false)
 	private int codigo;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_endereco")
+	@OneToOne
+	@JoinColumn(name="id_endereco",nullable=false)
 	private Endereco endereco;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name ="id_pessoa_f")
 	private Pessoa_fisica pessoaFisica;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name ="id_pessoa_j",nullable=true)
+	@OneToOne
+	@JoinColumn(name ="id_pessoa_j")
 	private Pessoa_juridica pessoaJuridica;
 	
 	public Pessoa() {
@@ -74,6 +74,12 @@ public class Pessoa {
 		return id;
 	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
 	public String getNome() {
 		return nome;
 	}

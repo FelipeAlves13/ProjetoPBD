@@ -1,6 +1,7 @@
 package br.com.view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -16,44 +17,43 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.SystemColor;
 
-public class TelaReservas extends JDialog {
+public class TelaReservas extends JPanel {
 
-	private final JPanel contentPanel = new JPanel();
+	private final JPanel contentPanel;
 	private JTable table;
-	private JTable table_2;
 	private JTextField textField;
 	private JButton btnAtualizar;
-	private JButton btnFazerLocao, btnBuscarReserva;
+	private JButton btnFazerLocao, btnBuscarReserva,btnEditar;
 	private JLabel lblNome;
 	private JLabel lblReservas;
 
 	
 	public TelaReservas() {
-		setBounds(100, 100, 518, 383);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
-		
-		
-		
-		
+		setLayout(new BorderLayout());
+		setSize(500,300);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(20, 126, 460, 168);
-		contentPanel.add(scrollPane);
+		scrollPane.setBounds(10, 116, 481, 165);
+		add(scrollPane);
 		
-		table_2 = new JTable();
-		table_2.setModel(new DefaultTableModel(
+		contentPanel = new JPanel();
+		contentPanel.setBackground(SystemColor.text);
+		contentPanel.setLayout(null);
+		contentPanel.setPreferredSize(new Dimension(500, 120));
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"Nome", "Categoria", "Data", "Hora"
+				"Nome do Cliente", "Categoria", "Data", "Hora","Staus"
 			}
 		));
-		scrollPane.setViewportView(table_2);
+		scrollPane.setViewportView(table);
 		
 		btnBuscarReserva = new JButton("Buscar");
+		btnBuscarReserva.setBackground(SystemColor.textHighlight);
 		btnBuscarReserva.setBounds(161, 87, 81, 28);
 		contentPanel.add(btnBuscarReserva);
 		
@@ -63,14 +63,15 @@ public class TelaReservas extends JDialog {
 		textField.setColumns(10);
 		
 		btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.setBackground(SystemColor.textHighlight);
 	
 		
 		btnAtualizar.setBounds(377, 87, 103, 28);
 		contentPanel.add(btnAtualizar);
 		
-		btnFazerLocao = new JButton("Fazer Loca\u00E7\u00E3o");
-		btnFazerLocao.setBounds(20, 305, 120, 29);
-		contentPanel.add(btnFazerLocao);
+//		btnFazerLocao = new JButton("Fazer Loca\u00E7\u00E3o");
+//		btnFazerLocao.setBounds(20, 305, 120, 29);
+//		contentPanel.add(btnFazerLocao);
 		
 		lblNome = new JLabel("Nome");
 		lblNome.setBounds(20, 75, 46, 14);
@@ -81,19 +82,22 @@ public class TelaReservas extends JDialog {
 		lblReservas.setBounds(20, 11, 104, 29);
 		contentPanel.add(lblReservas);
 		
-		setVisible(false);
+		add(contentPanel,BorderLayout.NORTH);
 		
+		btnEditar = new JButton("Editar");
+		btnEditar.setBackground(SystemColor.textHighlight);
+		btnEditar.setBounds(265, 88, 89, 27);
+		contentPanel.add(btnEditar);
+			
 		
 	}
+
+
+	
 
 
 	public JTable getTable() {
 		return table;
-	}
-
-
-	public JTable getTable_2() {
-		return table_2;
 	}
 
 
@@ -124,6 +128,14 @@ public class TelaReservas extends JDialog {
 
 	public JLabel getLblReservas() {
 		return lblReservas;
+	}
+
+
+
+
+
+	public JButton getBtnEditar() {
+		return btnEditar;
 	}
 	
 	

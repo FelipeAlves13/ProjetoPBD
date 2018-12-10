@@ -1,4 +1,4 @@
-package br.com.modelBeans;
+package br.com.modelbeans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +19,7 @@ public class Funcionario {
 	private String nome;
 	@Column(length=30,nullable=false)
 	private String login;
-	@Column(length=12,nullable=false)
+	@Column(length=255,nullable=false)
 	private String senha;
 	@Column(length=40,nullable=false)
 	private String cargo;

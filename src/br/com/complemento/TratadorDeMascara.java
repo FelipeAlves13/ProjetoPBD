@@ -1,5 +1,7 @@
 package br.com.complemento;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -28,6 +30,27 @@ public class TratadorDeMascara {
 			throw new ValidacaoException("Erro ao validar data!!!");
 		}
 	}
+	
+	public static Date hora(String s) throws ValidacaoException, ParseException {
+		//String[] horas = s.split(":");
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat sdf3 = new SimpleDateFormat("HH:mm");
+		try {
+
+		//	System.out.println("Data:"+c.getTime());
+			
+			c.setTime(sdf3.parse(s));
+			return c.getTime();
+		}catch(NumberFormatException e) {
+			//lançar validação exception
+			throw new ValidacaoException("Erro ao validar hora!!!");
+		}
+		catch(InputMismatchException e) {
+			//lançar validação exception
+			throw new ValidacaoException("Erro ao validar hora!!!");
+		}
+		}
+	
 	/**
 	 * @param:CPF sem a mascara*/
 	public static boolean isCPF(String CPF) throws ValidacaoException {

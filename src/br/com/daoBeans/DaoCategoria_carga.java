@@ -1,15 +1,11 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import br.com.modelBeans.Categoria;
-import br.com.modelBeans.Categoria_carga;
-import br.com.modelBeans.Categoria_passageiro;
+import br.com.modelbeans.Categoria_carga;
 
 public class DaoCategoria_carga {
 
@@ -43,7 +39,7 @@ public class DaoCategoria_carga {
 		}
 	}
 	
-	public void persist(Categoria_carga cc) {
+	public void persistCategoriaCarga(Categoria_carga cc) {
 		try{
 			this.em = Connection.getEmf().createEntityManager();
 			//instancia  o  EM
@@ -96,6 +92,7 @@ public class DaoCategoria_carga {
 	}
 	
 	public Categoria_carga buscarIdDoUltimoDado() {
+		this.em= Connection.getEmf().createEntityManager();
 		em.getTransaction().begin();
 		Query q = em.createQuery("select cc from Categoria_carga cc order by cc.id DESC");
 		List<Categoria_carga> ccs =(List<Categoria_carga>) q.getResultList();

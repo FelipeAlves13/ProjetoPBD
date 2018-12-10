@@ -1,54 +1,47 @@
 package br.com.view;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.SystemColor;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JSeparator;
+import java.awt.Font;
 
-public class TelaCategoria extends JDialog {
+public class TelaCategoria extends JPanel {
 
-	private final JPanel contentPanel = new JPanel();
+	private final JPanel contentPanel;
 	private JTable table;
 	private JTextField textField;
-	JButton btnBuscarButton,btnAtualizar;
+	private JButton btnBuscarButton,btnAtualizar,btnEditar;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			TelaCategoria dialog = new TelaCategoria();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
+	
 	public TelaCategoria() {
-		setBounds(100, 100, 497, 333);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		
+		setLayout(new BorderLayout());
+		
+		//setBackground(Color.WHITE);
+		//contentPanelTabela = new JPanel(new BorderLayout());
+		
+		//contentPanelTabela.setPreferredSize(new Dimension(500, 200));
+		
+		contentPanel = new JPanel();
+		contentPanel.setBackground(SystemColor.text);
 		contentPanel.setLayout(null);
-		{
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 116, 461, 165);
-			contentPanel.add(scrollPane);
+		contentPanel.setPreferredSize(new Dimension(500, 120));
+		
+		JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(10, 102, 430, 187);
+			add(scrollPane);
 			
 			table = new JTable();
 			table.setModel(new DefaultTableModel(
@@ -58,40 +51,48 @@ public class TelaCategoria extends JDialog {
 					"Nome", "Tempo de limpeza", "Tempo de revis\u00E3o"
 				}
 			));
-			table.getColumnModel().getColumn(1).setPreferredWidth(104);
-			table.getColumnModel().getColumn(2).setPreferredWidth(104);
+			
 			scrollPane.setViewportView(table);
-		}
 		
-		btnBuscarButton = new JButton("Adicionar categoria");
 		
-		btnBuscarButton.setBounds(346, 82, 125, 23);
+		btnBuscarButton = new JButton("Buscar");
+		btnBuscarButton.setBackground(SystemColor.textHighlight);
+		
+		btnBuscarButton.setBounds(244, 76, 125, 27);
 		contentPanel.add(btnBuscarButton);
 		
 		textField = new JTextField();
-		textField.setBounds(10, 83, 171, 20);
+		textField.setBounds(10, 76, 224, 27);
 		contentPanel.add(textField);
 		textField.setColumns(10);
 		
-		btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnAtualizar.setBounds(191, 82, 89, 23);
+		btnAtualizar = new JButton("Cadastrar");
+	
+		btnAtualizar.setBackground(SystemColor.textHighlight);
+		
+		btnAtualizar.setBounds(463, 76, 111, 27);
 		contentPanel.add(btnAtualizar);
 		
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(10, 68, 46, 14);
+		lblNome.setBounds(10, 60, 46, 14);
 		contentPanel.add(lblNome);
 		
 		JLabel lblCategorias = new JLabel("Categorias");
+		lblCategorias.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCategorias.setBounds(10, 22, 111, 27);
 		contentPanel.add(lblCategorias);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 47, 481, 2);
 		contentPanel.add(separator);
+		
+		add(contentPanel,BorderLayout.NORTH);
+		
+		btnEditar = new JButton("Editar");
+		btnEditar.setBackground(SystemColor.textHighlight);
+		btnEditar.setBounds(371, 76, 90, 27);
+		contentPanel.add(btnEditar);
+		
 	}
 
 	public JTable getTable() {
@@ -109,5 +110,10 @@ public class TelaCategoria extends JDialog {
 	public JButton getBtnAtualizar() {
 		return btnAtualizar;
 	}
+
+	public JButton getBtnEditar() {
+		return btnEditar;
+	}
+	
 	
 }

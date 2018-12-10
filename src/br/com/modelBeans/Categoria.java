@@ -1,4 +1,4 @@
-package br.com.modelBeans;
+package br.com.modelbeans;
 
 import java.util.Date;
 
@@ -72,10 +72,16 @@ public class Categoria {
 //		this.tamanho = tamanho;
 //	}
 	
+	
 	public boolean isCamera_re() {
 		return camera_re;
 	}
 	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
 	public void setCamera_re(boolean camera_re) {
 		this.camera_re = camera_re;
 	}

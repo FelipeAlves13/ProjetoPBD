@@ -1,8 +1,9 @@
-package br.com.modelBeans;
+package br.com.modelbeans;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,15 +21,25 @@ public class Reserva {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="res_seq")
 	private int id;
+	@Column(nullable=false)
 	@Temporal(TemporalType.TIME)
 	private Date hora;
+	@Column(nullable=false)
+	@Temporal(TemporalType.TIME)
+	private Date horaLocacao;
+	@Column(nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date data;
+	@Temporal(TemporalType.DATE)
+	@Column(nullable=false)
+	private Date dataLocacao;
+	@Column(nullable=false)
+	private boolean status;
 	@ManyToOne
-	@JoinColumn(name="id_categoria")
+	@JoinColumn(name="id_categoria",nullable=false)
 	private Categoria categoria;
 	@ManyToOne
-	@JoinColumn(name="id_pessoa")
+	@JoinColumn(name="id_pessoa",nullable = false)
 	private Pessoa pessoa;
 	
 	public int getId() {
@@ -36,6 +47,16 @@ public class Reserva {
 	}
 	
 	
+	public void setHoraLocacao(Date horaLocacao) {
+		this.horaLocacao = horaLocacao;
+	}
+
+
+	public void setDataLocacao(Date dataLocacao) {
+		this.dataLocacao = dataLocacao;
+	}
+
+
 	public Date getHora() {
 		return hora;
 	}
@@ -68,6 +89,26 @@ public class Reserva {
 	
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+
+	public boolean isStatus() {
+		return status;
+	}
+
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+
+	public Date getHoraLocacao() {
+		return horaLocacao;
+	}
+
+
+	public Date getDataLocacao() {
+		return dataLocacao;
 	}
 	
 	

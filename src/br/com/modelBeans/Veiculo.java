@@ -1,4 +1,4 @@
-package br.com.modelBeans;
+package br.com.modelbeans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,13 +47,13 @@ public class Veiculo {
 	private String modelo;
 	@Column(nullable=false)
 	private int numero_passageiro;
-	@Column(nullable=false)
-	private int tamanho;
+	@Column(length=15,nullable=false)
+	private String tamanho;
 	@ManyToOne
-	@JoinColumn(name="id_categoria")
+	@JoinColumn(name="id_categoria",nullable=false)
 	private Categoria cat;
 	@ManyToOne
-	@JoinColumn(name="id_filial")
+	@JoinColumn(name="id_filial",nullable=false)
 	private Filial filial;
 	
 	public int getId() {
@@ -151,12 +151,17 @@ public class Veiculo {
 	public void setNumero_passageiro(int numero_passageiro) {
 		this.numero_passageiro = numero_passageiro;
 	}
-	public int getTamanho() {
+	
+	public String getTamanho() {
 		return tamanho;
 	}
-	public void setTamanho(int tamanho) {
+
+
+	public void setTamanho(String tamanho) {
 		this.tamanho = tamanho;
 	}
+
+
 	public Categoria getCat() {
 		return cat;
 	}

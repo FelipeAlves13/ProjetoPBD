@@ -1,16 +1,11 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import br.com.modelBeans.Categoria_carga;
-import br.com.modelBeans.Endereco;
-import br.com.modelBeans.Pessoa;
-import br.com.modelBeans.Pessoa_juridica;
+import br.com.modelbeans.Pessoa_juridica;
 
 public class DaoPessoa_juridica {
 
@@ -30,7 +25,7 @@ public class DaoPessoa_juridica {
 		return p;
 	}
 	
-	public void persist(Pessoa_juridica pj) {
+	public void persistPessistPessoaJuridica(Pessoa_juridica pj) {
 		try{
 			this.em = Connection.getEmf().createEntityManager();
 			//instancia  o  EM
@@ -96,5 +91,16 @@ public class DaoPessoa_juridica {
 		}  finally  {
 			em.close(); //  fevhar  a  conexão
 		} 
+	}
+	public Pessoa_juridica buscarIdDoUltimoDado() {
+		this.em = Connection.getEmf().createEntityManager();
+		em.getTransaction().begin();
+		Query q = em.createQuery("select pj from Pessoa_juridica pj order by pj.id DESC");
+		List<Pessoa_juridica> pjs =(List<Pessoa_juridica>) q.getResultList();
+		em.getTransaction().commit();
+		em.close();
+		Pessoa_juridica pj = null; 
+		pj= pjs.get(0);
+		return pj;
 	}
 }

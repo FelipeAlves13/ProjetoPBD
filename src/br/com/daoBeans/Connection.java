@@ -1,4 +1,4 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

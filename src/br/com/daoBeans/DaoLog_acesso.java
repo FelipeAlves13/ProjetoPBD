@@ -1,15 +1,11 @@
-package br.com.daoBeans;
+package br.com.daobeans;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import br.com.modelBeans.Categoria_carga;
-import br.com.modelBeans.Funcionario;
-import br.com.modelBeans.Log_acesso;
+import br.com.modelbeans.Log_acesso;
 
 public class DaoLog_acesso {
 	//  fazer  as  transações  
