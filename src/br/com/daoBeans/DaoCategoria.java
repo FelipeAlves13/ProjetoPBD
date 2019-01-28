@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.exception.DaoException;
-import br.com.modelbeans.Categoria;
+import br.com.model.entidadesbeans.Categoria;
 
 
 public class DaoCategoria {
@@ -67,6 +67,38 @@ public class DaoCategoria {
 			em.getTransaction().begin(); //  abrindo
 			Query q = em.createQuery("select c from Categoria c where c.nome like :name order by c.nome");
 			q.setParameter("name","%"+name+"%");
+			List<Categoria> c =(List<Categoria>) q.getResultList();
+			em.getTransaction().commit();
+			em.close(); 
+			return c;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Nao a categorias cadastradas");
+		}
+	}
+	
+	public List<Categoria> BuscaCategoriaCarga() throws DaoException {
+		try {
+			this.em = Connection.getEmf().createEntityManager();
+			em.getTransaction().begin(); //  abrindo
+			Query q = em.createQuery("select c from Categoria c, Categoria_carga cc where c.categoria_carga=cc ");
+			
+			List<Categoria> c =(List<Categoria>) q.getResultList();
+			em.getTransaction().commit();
+			em.close(); 
+			return c;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Nao a categorias cadastradas");
+		}
+	}
+	
+	public List<Categoria> BuscaCategoriaPassageiro() throws DaoException {
+		try {
+			this.em = Connection.getEmf().createEntityManager();
+			em.getTransaction().begin(); //  abrindo
+			Query q = em.createQuery("select c from Categoria c, Categoria_passageiro cp where c.categoria_passageiro=cp ");
+			
 			List<Categoria> c =(List<Categoria>) q.getResultList();
 			em.getTransaction().commit();
 			em.close(); 

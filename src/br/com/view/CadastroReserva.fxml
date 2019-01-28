@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controller.ControleCadastroReservaPanel">
+   <children>
+      <ImageView fitHeight="260.0" fitWidth="717.0" layoutX="36.0" layoutY="51.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../../../../Desktop/carros.png" />
+         </image>
+         <effect>
+            <Reflection />
+         </effect>
+      </ImageView>
+      <BorderPane layoutX="70.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="650.0" style="-fx-border-color: black;">
+         <top>
+            <BorderPane prefHeight="49.0" prefWidth="560.0" style="-fx-background-color: linear-gradient(  #1E90FF,#000000);" BorderPane.alignment="CENTER">
+               <left>
+                  <Label text=" Cadastro de Reserva" textFill="#fcf9f9" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+               </left>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </BorderPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="322.0" prefWidth="612.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="15.0" layoutY="17.0" text="Cliente">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="280.0" layoutY="18.0" text="Data">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dataField" layoutX="279.0" layoutY="34.0" prefHeight="25.0" prefWidth="118.0" />
+                  <Label layoutX="18.0" layoutY="80.0" text="Transportar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="transportarBox" layoutX="18.0" layoutY="97.0" onAction="#actionPeformed" prefHeight="25.0" prefWidth="178.0" />
+                  <Label layoutX="222.0" layoutY="80.0" text="Categoria">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="categoriaBox" layoutX="220.0" layoutY="97.0" prefHeight="25.0" prefWidth="171.0" />
+                  <DatePicker fx:id="dataLocacaoField" layoutX="400.0" layoutY="35.0" prefHeight="25.0" prefWidth="118.0" />
+                  <Label layoutX="402.0" layoutY="18.0" text="Data da Locação">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="526.0" layoutY="15.0" text="Hora da locação">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="fazerReservaButton" layoutX="15.0" layoutY="275.0" mnemonicParsing="false" onAction="#actionPeformed" prefHeight="42.0" prefWidth="106.0" style="-fx-background-color: linear-gradient(  #1E90FF,#000000);" text="Fazer Reserva" textFill="#fcf8f8">
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <JFXTimePicker fx:id="horaLocacao" layoutX="524.0" layoutY="30.0" prefHeight="25.0" prefWidth="121.0" />
+                  <Pane layoutX="17.0" layoutY="129.0" prefHeight="142.0" prefWidth="619.0" style="-fx-border-color: black;" />
+                  <Pane fx:id="panelCarga" layoutX="17.0" layoutY="129.0" prefHeight="142.0" prefWidth="619.0" style="-fx-border-color: black;" visible="false">
+                     <children>
+                        <Label layoutX="95.0" layoutY="87.0" text="Volume do combustivel">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cambioBox" layoutX="58.0" layoutY="54.0" prefHeight="25.0" prefWidth="150.0" />
+                        <CheckBox fx:id="cameraBox" layoutX="156.0" layoutY="5.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="115.0" text="Camera de Ré">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="direcaoBox" layoutX="270.0" layoutY="11.0" mnemonicParsing="false" text="Direção hidraulica">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="mp3Box" layoutX="409.0" layoutY="11.0" mnemonicParsing="false" text="MP3">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="arcondBox" layoutX="471.0" layoutY="10.0" mnemonicParsing="false" text="Ar condicionado">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="dvdBox" layoutX="28.0" layoutY="11.0" mnemonicParsing="false" text="DVD">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="radioBox" layoutX="88.0" layoutY="11.0" mnemonicParsing="false" text="Radio">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <Label layoutX="216.0" layoutY="38.0" text="Capacidade de carga">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="343.0" layoutY="39.0" text="Desempenho">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="427.0" layoutY="39.0" text="Distancia entre os eixos">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="desempenhoField" layoutX="343.0" layoutY="55.0" prefHeight="25.0" prefWidth="74.0" />
+                        <TextField fx:id="capacidadeField" layoutX="217.0" layoutY="55.0" prefHeight="25.0" prefWidth="116.0" />
+                        <TextField fx:id="potenciaMotField" layoutX="245.0" layoutY="103.0" prefHeight="25.0" prefWidth="105.0" />
+                        <TextField fx:id="distEixosField" layoutX="428.0" layoutY="55.0" prefHeight="25.0" prefWidth="133.0" />
+                        <Label layoutX="247.0" layoutY="87.0" text="Potencia do motor">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="volumeField" layoutX="95.0" layoutY="103.0" prefHeight="25.0" prefWidth="133.0" />
+                        <Label layoutX="58.0" layoutY="38.0" text="Tipo de cambio">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="embreagemBox" layoutX="362.0" layoutY="103.0" prefHeight="25.0" prefWidth="161.0" />
+                        <Label layoutX="361.0" layoutY="87.0" text="Acionamento da embreagem">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="panelPassageiro" layoutX="17.0" layoutY="129.0" prefHeight="142.0" prefWidth="619.0" style="-fx-border-color: black;">
+                     <children>
+                        <CheckBox fx:id="rodaBox" layoutX="200.0" layoutY="96.0" mnemonicParsing="false" text="Rodas de liga leve">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="airBagBox" layoutX="130.0" layoutY="95.0" mnemonicParsing="false" text="Air bag">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="cintoBox" layoutX="463.0" layoutY="62.0" mnemonicParsing="false" text="Cinto de segurança">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="controlePolBox" layoutX="331.0" layoutY="96.0" mnemonicParsing="false" text="Controle de poluição">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="direcaoAbox" layoutX="476.0" layoutY="96.0" mnemonicParsing="false" text="Direção assistida">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="mp3Box1" layoutX="78.0" layoutY="96.0" mnemonicParsing="false" text="MP3">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="dvdBox1" layoutX="25.0" layoutY="97.0" mnemonicParsing="false" text="DVD">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="cameraBox1" layoutX="25.0" layoutY="56.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="115.0" text="Camera de Ré">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="direcaoBox1" layoutX="132.0" layoutY="62.0" mnemonicParsing="false" text="Direção hidraulica">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="arcondBox1" layoutX="262.0" layoutY="62.0" mnemonicParsing="false" text="Ar condicionado">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="radioBox1" layoutX="389.0" layoutY="62.0" mnemonicParsing="false" text="Radio">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                        <ComboBox fx:id="cambioBox1" layoutX="237.0" layoutY="26.0" prefHeight="28.0" prefWidth="150.0" />
+                        <Label layoutX="266.0" layoutY="7.0" text="Tipo de cambio">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <TextField fx:id="clienteField" layoutX="14.0" layoutY="34.0" prefHeight="25.0" prefWidth="227.0" />
+                  <ComboBox fx:id="filialBox" layoutX="408.0" layoutY="97.0" prefHeight="26.0" prefWidth="228.0" />
+                  <Label layoutX="408.0" layoutY="80.0" text="Filial onde sera feita a locação">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="buscarCliente" layoutX="243.0" layoutY="34.0" mnemonicParsing="false" onAction="#actionPeformed" prefWidth="34.0" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</Pane>

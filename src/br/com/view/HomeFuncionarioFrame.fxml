@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="homeFuncionarioFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="810.0" style="-fx-background-image: url(&quot;C:\Users\DBÇ8\Desktop\carros.png&quot;);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controller.ControleHomeFuncionario">
+   <top>
+      <BorderPane prefHeight="121.0" prefWidth="718.0" style="-fx-background-color: #00BFFF;" BorderPane.alignment="CENTER">
+         <bottom>
+            <MenuBar prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: #1E90FF;" BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="Cadastros/Consultas">
+                  <items>
+                    <MenuItem fx:id="clienteItem" mnemonicParsing="false" onAction="#actionPeformed" text="Clientes">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="80.0">
+                                 <image>
+                                    <Image url="@../../../../imagens/Clientes.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="veiculoItem" mnemonicParsing="false" onAction="#actionPeformed" text="Veiculos">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="120.0">
+                                 <image>
+                                    <Image url="@../../../../imagens/carro.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="filialItem" mnemonicParsing="false" onAction="#actionPeformed" text="Filiais">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="90.0">
+                                 <image>
+                                    <Image url="@../../../../imagens/kisspng-company-corporation-building-icon-building-5a712d39876669.1237000715173665855546.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="categoriaItem" mnemonicParsing="false" onAction="#actionPeformed" text="Categorias">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="90.0">
+                                 <image>
+                                    <Image url="@../../../../imagens/categoria-png-7.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="funcionarioItem" mnemonicParsing="false" onAction="#actionPeformed" text="Funcionarios">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="90.0">
+                                 <image>
+                                    <Image url="@../../../../imagens/funcionarios-png-1-300x200.png" />
+                                 </image></ImageView>
+                           </graphic>
+                        </MenuItem>
+                  </items>
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="40.0">
+                           <image>
+                              <Image url="@../../../../imagens/icons8-serviços-100.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Reservas">
+                  <items>
+                    <MenuItem fx:id="fazerReservaItem" mnemonicParsing="false" onAction="#actionPeformed" text="Fazer Reserva">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="60.0">
+                                 <image>
+                                    <Image url="@../../../../imagens/icons8-reserva-2-filled-100%20(1).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="consReservaItem" mnemonicParsing="false" onAction="#actionPeformed" text="Consultar Reservas">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="60.0">
+                                 <image>
+                                    <Image url="@../../../../imagens/icons8-pesquisar-100.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                  </items>
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="38.0">
+                           <image>
+                              <Image url="@../../../../imagens/icons8-reserva-2-filled-100.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Backup">
+                     <items>
+                        <MenuItem fx:id="diretorioItem" mnemonicParsing="false" onAction="#actionPeformed" text="Hora do backup">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="50.0">
+                                 <image>
+                                    <Image url="@../../../../imagens/relogio.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                     </items>
+                     <graphic>
+                        <ImageView fitHeight="38.0" fitWidth="41.0">
+                           <image>
+                              <Image url="@../../../../imagens/icons8-backup-de-dados-filled-100.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Locações">
+                     <items>
+                        <MenuItem fx:id="fazerLocacaoItem" mnemonicParsing="false" onAction="#actionPeformed" text="Fazer locação">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="50.0">
+                                 <image>
+                                    <Image url="@../../../../imagens/icons8-adicionar-o-carrinho-de-compras-100%20(1).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="financaItem" mnemonicParsing="false" onAction="#actionPeformed" text="Financas">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="70.0">
+                                 <image>
+                                    <Image url="@../../../../imagens/gold-coins-png-image-5a39ea969c04d5.46004495151374504663918390.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="veiculosDItem" mnemonicParsing="false" onAction="#actionPeformed" text="veiculos disponiveis ">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="70.0">
+                                 <image>
+                                    <Image url="@../../../../imagens/carro.png" />
+                                 </image></ImageView>
+                           </graphic>
+                        </MenuItem>
+                     </items>
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="44.0">
+                           <image>
+                              <Image url="@../../../../imagens/icons8-adicionar-o-carrinho-de-compras-100.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Relatorios">
+                     <items>
+                        <MenuItem fx:id="relatorioItem" mnemonicParsing="false" onAction="#actionPeformed" text="Relatorios">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0">
+                                 <image>
+                                    <Image url="@../../../../imagens/icons8-document-100%20(2).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                     </items>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0">
+                           <image>
+                              <Image url="@../../../../imagens/icons8-document-100%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Menu>
+                  <Menu fx:id="auditoriaMenu" mnemonicParsing="false" text="Auditoria">
+                     <items>
+                        <MenuItem fx:id="logAcessoItem" mnemonicParsing="false" onAction="#actionPeformed" text="Log de Acesso">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0">
+                                 <image>
+                                    <Image url="@../../../../imagens/icons8-document-100%20(2).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                     </items>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0">
+                           <image>
+                              <Image url="@../../../../imagens/icons8-document-100%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Menu>
+              </menus>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </MenuBar>
+         </bottom>
+         <center>
+            <Label prefHeight="56.0" prefWidth="203.0" text="Veículos Pajeú" textFill="#060707" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Blackadder ITC" size="34.0" />
+               </font>
+            </Label>
+         </center>
+         <left>
+            <AnchorPane prefHeight="71.0" prefWidth="131.0" BorderPane.alignment="CENTER">
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </AnchorPane>
+         </left>
+         <effect>
+            <InnerShadow height="44.72" radius="15.93" />
+         </effect>
+         <right>
+            <MenuButton mnemonicParsing="false" prefHeight="76.0" prefWidth="99.0" BorderPane.alignment="CENTER">
+              <items>
+                <MenuItem fx:id="perfilItem" mnemonicParsing="false" onAction="#actionPeformed" text="Perfil">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0">
+                           <image>
+                              <Image url="@../../../../imagens/avatar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                <MenuItem fx:id="senhaItem" mnemonicParsing="false" onAction="#actionPeformed" text="Senha">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="50.0">
+                           <image>
+                              <Image url="@../../../../imagens/icons8-keepass-100.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="logoutItem" mnemonicParsing="false" onAction="#actionPeformed" text="Logout">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="50.0">
+                           <image>
+                              <Image url="@../../../../imagens/shutdown.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+              </items>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="64.0">
+                     <image>
+                        <Image url="@../../../../imagens/Funcionario.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </MenuButton>
+         </right>
+      </BorderPane>
+   </top>
+   <effect>
+      <InnerShadow />
+   </effect>
+   <center>
+      <Pane fx:id="paneImage" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="260.0" fitWidth="717.0" layoutX="56.0" layoutY="71.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../../imagens/carros.png" />
+               </image>
+               <effect>
+                  <Reflection />
+               </effect>
+            </ImageView>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

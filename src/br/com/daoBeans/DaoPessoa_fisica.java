@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.modelbeans.Pessoa_fisica;
+import br.com.model.entidadesbeans.Pessoa_fisica;
 
 public class DaoPessoa_fisica {
 

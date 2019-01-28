@@ -1,11 +1,15 @@
 package br.com.daobeans;
 
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.modelbeans.Veiculo;
+import br.com.model.entidadesbeans.Categoria;
+import br.com.model.entidadesbeans.Filial;
+import br.com.model.entidadesbeans.Veiculo;
 
 public class DaoVeiculo {
 	//  fazer  as  transações  
@@ -63,7 +67,7 @@ public class DaoVeiculo {
 	public List<Veiculo> BuscaVeiculo(String modelo) {
 		this.em = Connection.getEmf().createEntityManager();
 		em.getTransaction().begin(); //  abrindo
-		Query q = em.createQuery("select veiculo from Veiculo veiculo where veiculo.modelo like :modelo order by veiculo.modelo ");
+		Query q = em.createQuery("select veiculo from Veiculo veiculo,Filial f where veiculo.modelo like :modelo and veiculo.filial=f  or veiculo.filial=f  and f.nome like :modelo  order by veiculo.modelo ");
 		q.setParameter("modelo","%"+modelo+"%");
 		List<Veiculo> v =(List<Veiculo>) q.getResultList();
 		em.getTransaction().commit();
@@ -75,6 +79,36 @@ public class DaoVeiculo {
 		em.getTransaction().begin(); //  abrindo
 		Query q = em.createQuery("select veiculo from Veiculo veiculo, Categoria categoria where veiculo.cat = categoria and categoria.nome like :categoria ");
 		q.setParameter("categoria","%"+categoria+"%");
+		List<Veiculo> v =(List<Veiculo>) q.getResultList();
+		em.getTransaction().commit();
+		em.close(); 
+		return v;
+	}
+	
+//	
+	
+//	public List<Veiculo> buscarVeiculosIndisponiveis(){
+//		this.em = Connection.getEmf().createEntityManager();
+//		em.getTransaction().begin(); //  abrindo
+//		Query q = em.createQuery("select v from Veiculo v where v.disponivel=false ");
+//		List<Veiculo> v =(List<Veiculo>) q.getResultList();
+//		em.getTransaction().commit();
+//		em.close(); 
+//		if(v!=null) {
+//			return v;
+//		}else {
+//			return v = new ArrayList<>();
+//		}
+//		
+//	}
+	
+	public List<Veiculo> buscarVeiculosDisponiveis(String name,Categoria c,Filial f){
+		this.em = Connection.getEmf().createEntityManager();
+		em.getTransaction().begin(); //  abrindo
+		Query q = em.createQuery("select v from Veiculo v where v.disponivel=true and v.modelo like :name and v.cat =:c and v.filial=:f and v.disponivel=true order by v.id");
+		q.setParameter("name","%"+name+"%");
+		q.setParameter("c",c);
+		q.setParameter("f",f);
 		List<Veiculo> v =(List<Veiculo>) q.getResultList();
 		em.getTransaction().commit();
 		em.close(); 
@@ -101,6 +135,19 @@ public class DaoVeiculo {
 		em.getTransaction().commit();
 		em.close();
 		return v;
+	}
+	
+	public int qtdVeiculosDeUmaCategoriaDisponiveis(int id,int id2) {
+		int qtd=0;
+		this.em = Connection.getEmf().createEntityManager();
+		em.getTransaction().begin();
+		Query q = em.createNativeQuery("select qtddeveiculosdisponiveis(:n,:n2)");
+		q.setParameter("n", id);
+		q.setParameter("n2",id2);
+		qtd=(Integer)q.getSingleResult();
+		em.getTransaction().commit();
+		em.close();
+		return qtd;
 	}
 
 }

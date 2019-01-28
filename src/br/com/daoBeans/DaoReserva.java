@@ -1,12 +1,13 @@
 package br.com.daobeans;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.exception.DaoException;
-import br.com.modelbeans.Reserva;
+import br.com.model.entidadesbeans.Reserva;
 
 public class DaoReserva {
 	//  fazer  as  transações  
@@ -75,6 +76,24 @@ public class DaoReserva {
 			throw new DaoException("Erro!! não a reservas!!");
 		}
 		
+	}
+	
+	public List<Reserva> buscarPorPeriodoNome(String nome,Date inicio,Date fim) throws DaoException {
+		try {
+			this.em =Connection.getEmf().createEntityManager();
+			em.getTransaction().begin(); //  abrindo
+			Query q = em.createQuery("select reserva from Reserva reserva, Pessoa p where reserva.pessoa = p and p.nome like :name and reserva.data between :inicio and :fim");
+			q.setParameter("name","%"+nome+"%");
+			q.setParameter("inicio",inicio);
+			q.setParameter("fim", fim);
+			List<Reserva> rs =(List<Reserva>) q.getResultList();
+			em.getTransaction().commit();
+			em.close(); 
+			return rs;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Erro!! não a reservas!!");
+		}
 	}
 	
 	public void remover(Reserva r) {

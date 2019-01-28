@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.modelbeans.Categoria_carga;
+import br.com.model.entidadesbeans.Categoria_carga;
 
 public class DaoCategoria_carga {
 

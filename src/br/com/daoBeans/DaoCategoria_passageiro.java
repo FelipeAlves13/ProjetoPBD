@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.modelbeans.Categoria_passageiro;
+import br.com.model.entidadesbeans.Categoria_passageiro;
 
 public class DaoCategoria_passageiro {
 	//  fazer  as  transações  

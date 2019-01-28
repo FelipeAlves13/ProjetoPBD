@@ -6,7 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.exception.DaoException;
-import br.com.modelbeans.Funcionario;
+import br.com.model.entidadesbeans.Funcionario;
+import br.com.model.entidadesbeans.Pessoa;
 
 public class DaoFuncionario {
 	//  fazer  as  transações  
@@ -98,27 +99,37 @@ public class DaoFuncionario {
 		em.close();
 		return f;
 	}
-	
-	public Funcionario buscarLogin(String usuario,String senha) throws DaoException {
-		try {
-			this.em = Connection.getEmf().createEntityManager();
-			em.getTransaction().begin();
-			Query q = em.createQuery("select funcionario from Funcionario funcionario where funcionario.login = :u and funcionario.senha = :s");
-			q.setParameter("u",usuario);
-			q.setParameter("s",senha);
-		    Funcionario f = new Funcionario();
-			f = (Funcionario)q.getSingleResult();
-			em.getTransaction().commit();
-			System.out.print(f.getNome());
-			em.close();
-			return f;
-		}catch(Exception e) {
-			e.printStackTrace();
-			throw new DaoException("Não a funcionarios cadastrados!!");
-			
-			
-		}
-		
+	public Funcionario buscarIdDoUltimoDado() {
+		this.em = Connection.getEmf().createEntityManager();
+		em.getTransaction().begin();
+		Query q = em.createQuery("select f from Funcionario f order by f.id DESC");
+		List<Funcionario> fs =(List<Funcionario>) q.getResultList();
+		em.getTransaction().commit();
+		em.close();
+		Funcionario f = null; 
+		f= fs.get(0);
+		return f;
 	}
+//	public Funcionario buscarLogin(String usuario,String senha) throws DaoException {
+//		try {
+//			this.em = Connection.getEmf().createEntityManager();
+//			em.getTransaction().begin();
+//			Query q = em.createQuery("select funcionario from Funcionario funcionario where funcionario.login = :u and funcionario.senha = :s");
+//			q.setParameter("u",usuario);
+//			q.setParameter("s",senha);
+//		    Funcionario f = new Funcionario();
+//			f = (Funcionario)q.getSingleResult();
+//			em.getTransaction().commit();
+//			System.out.print(f.getNome());
+//			em.close();
+//			return f;
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//			throw new DaoException("Não a funcionarios cadastrados!!");
+//			
+//			
+//		}
+		
+//	}
 
 }

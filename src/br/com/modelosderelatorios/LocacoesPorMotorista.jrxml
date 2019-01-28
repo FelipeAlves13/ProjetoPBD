@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LocacoesPorMotorista" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a13a63c7-92e8-4553-a2ca-d5b1d382f043">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="motorista" class="java.lang.String"/>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="modalidade" class="java.lang.String"/>
+	<field name="veiculo" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="caf06bc2-254f-420a-8640-98e9fc807940"/>
+				<staticText>
+					<reportElement x="9" y="11" width="400" height="43" forecolor="#FFFFFF" uuid="a46e0ea4-ecfb-447c-87b0-d75b54d5d526"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Locações Por Motorista]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="409" y="43" width="166" height="20" forecolor="#FFFFFF" uuid="ddf1be58-1c8e-4d27-9f5d-5c737ea92620"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[VeiculosPajeu]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="440" y="64" width="150" height="16" forecolor="#FFFFFF" uuid="abbabe28-12a3-4f29-a62b-32c3697b3f65"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Cidade: Serra Talhada - PE]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" forecolor="#666666" uuid="acf32b89-5020-4719-8046-baee15e71dd9"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="141" height="21" uuid="f571b5dd-62e8-4cc4-b991-a46dd58dcd56">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e7fdb4ec-6b8b-4634-8af4-4c81d7dd6294"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Motorista]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="0" width="138" height="21" uuid="1f3fb21d-71d5-409e-a573-abfe2a1f4cdf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="531cfa30-e077-4a6c-a1b9-b63b3088f2fa"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[veiculo Alocado ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="0" width="138" height="21" uuid="56f7b8c8-907a-4bbb-aefc-3c93f2df633d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e4588f55-169c-4f87-aaf9-20e7c16ec999"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="0" width="138" height="21" uuid="58d4dd6a-d39a-4583-8ebf-62af9a20fb60">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8d20e79-ce17-4eff-bbc8-553b1521b3be"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[modalidade]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="43">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="32" width="555" height="1" uuid="cc48cde9-cc34-4a74-a5a8-ed4acaef90e5"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="-1" width="141" height="30" uuid="f7195509-6040-46d2-b5e3-59913bdaa90c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e7fdb4ec-6b8b-4634-8af4-4c81d7dd6294"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{motorista}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="1" width="138" height="30" uuid="c2ec1143-370e-4676-95f7-32ed57bbe4e7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e4588f55-169c-4f87-aaf9-20e7c16ec999"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="0" width="138" height="30" uuid="e2e3d1cb-c0b1-440c-aa11-175a5eddcd3e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8d20e79-ce17-4eff-bbc8-553b1521b3be"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{modalidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="143" y="1" width="136" height="28" uuid="70d1190b-7125-40bc-9cef-36387068150f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="37e505ba-5146-49e7-92f3-c47a62e82388"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{veiculo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="351ed671-1942-45c7-a880-5314b2f46bcc"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="b4efdd65-b527-4ab7-869a-2122893d57c1"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="28aca406-d77f-4165-84d8-32b7e7e7aec6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

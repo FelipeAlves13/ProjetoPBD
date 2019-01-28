@@ -68,20 +68,21 @@ public class Criptografia {
 		}
 		return ret;
 	}
-//	public static void main(String[] args) throws Exception {
-//		String password = "alo"; // esta ? a tal senha do banco de dados que voc? quer criptografar
-//		String encoded = Criptografia.encrypt (password);
-//		System.out.println (encoded); // imprime "4fWCjTdEhMPEluqE2n8ci4FiqWeb+DXc"
-//		//System.out.println (Criptografia.decrypt (encoded).equals (password)); // imprime "true"
-//		// Vamos alterar um caracter, s¢ para ver o que ocorre
-////		char[] enc = encoded.toCharArray();
-////		enc[2] = (char) (enc[2] + 1);
-////		encoded = new String (enc);
+	
+	public static void main(String[] args) throws Exception {
+		String password = "ZhVc5/VFGGc="; // esta ? a tal senha do banco de dados que voc? quer criptografar
+		String encoded = Criptografia.encrypt (password);
+		System.out.println (encoded); // imprime "4fWCjTdEhMPEluqE2n8ci4FiqWeb+DXc"
+		System.out.println (Criptografia.decrypt (password)); // imprime "true"
+		// Vamos alterar um caracter, s¢ para ver o que ocorre
+//		char[] enc = encoded.toCharArray();
+//		enc[2] = (char) (enc[2] + 1);
+//		encoded = new String (enc);
 //		password = "alo";
 //		System.out.println (Criptografia.encrypt (password));
-//		//System.out.println (encoded); // imprime "4fXCjTdEhMPEluqE2n8ci4FiqWeb+DXc"
-//		//System.out.println (Criptografia.decrypt (encoded)); // imprime "false"
-//	}
+		//System.out.println (encoded); // imprime "4fXCjTdEhMPEluqE2n8ci4FiqWeb+DXc"
+		//System.out.println (Criptografia.decrypt (encoded)); // imprime "false"
+	}
 }
 
 

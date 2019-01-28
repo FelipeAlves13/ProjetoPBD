@@ -8,7 +8,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.modelbeans.Endereco;
+import br.com.model.entidadesbeans.Endereco;
 
 public class DaoEndereco {
 	

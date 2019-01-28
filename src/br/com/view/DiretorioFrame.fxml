@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="239.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controller.ControleDiretorioPanel">
+   <children>
+      <Label prefHeight="69.0" prefWidth="239.0" style="-fx-background-color: linear-gradient( #00BFFF,#000000);" text="   Hora do Backup" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Label>
+      <Button fx:id="salvarButton" layoutX="58.0" layoutY="132.0" mnemonicParsing="false" onAction="#actionPeformed" prefHeight="36.0" prefWidth="117.0" style="-fx-background-color: linear-gradient( #00BFFF,#000000);" text="Salvar" textFill="#fcfafa">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <Label layoutX="103.0" layoutY="82.0" text="Hora">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <JFXTimePicker fx:id="horaField" layoutX="74.0" layoutY="99.0" prefHeight="25.0" prefWidth="91.0" />
+   </children>
+</AnchorPane>

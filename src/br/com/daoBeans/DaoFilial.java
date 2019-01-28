@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.exception.DaoException;
-import br.com.modelbeans.Filial;
+import br.com.model.entidadesbeans.Filial;
 
 public class DaoFilial {
 //  fazer  as  transações  

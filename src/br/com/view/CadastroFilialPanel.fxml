@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="608.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controller.ControleCadastroFilialPanel">
+   <children>
+      <Label prefHeight="60.0" prefWidth="608.0" style="-fx-background-color: linear-gradient( #00BFFF,#000000);" text=" Cadastro de Filial" textFill="#f2f2f2">
+         <font>
+            <Font name="Centaur" size="36.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Label>
+      <Label layoutX="14.0" layoutY="71.0" text="Nome">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nomeField" layoutX="14.0" layoutY="89.0" prefHeight="25.0" prefWidth="253.0" />
+      <Separator layoutX="16.0" layoutY="197.0" prefHeight="3.0" prefWidth="584.0" style="-fx-background-color: black;" />
+      <Label layoutX="250.0" layoutY="198.0" text="Endereco">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Separator layoutX="13.0" layoutY="233.0" prefHeight="3.0" prefWidth="584.0" style="-fx-background-color: black;" />
+      <TextField fx:id="cidadeField" layoutX="83.0" layoutY="260.0" prefHeight="25.0" />
+      <ComboBox fx:id="ufBox" layoutX="16.0" layoutY="260.0" prefHeight="25.0" prefWidth="61.0" />
+      <Label layoutX="17.0" layoutY="244.0" text="UF">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="82.0" layoutY="243.0" text="Cidade">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="cepField" layoutX="237.0" layoutY="260.0" prefHeight="25.0" />
+      <TextField fx:id="bairroField" layoutX="391.0" layoutY="261.0" prefHeight="25.0" prefWidth="204.0" />
+      <TextField fx:id="ruaField" layoutX="17.0" layoutY="306.0" prefHeight="25.0" prefWidth="219.0" />
+      <TextField fx:id="telefoneField" layoutX="240.0" layoutY="306.0" prefHeight="24.0" />
+      <Button fx:id="salvarButton" layoutX="17.0" layoutY="360.0" mnemonicParsing="false" onAction="#actionPeformed" prefHeight="33.0" prefWidth="125.0" style="-fx-background-color: linear-gradient( #00BFFF,#000000);" text="Salvar" textFill="#f7f8f8" />
+      <Label layoutX="238.0" layoutY="244.0" text="CEP">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="391.0" layoutY="244.0" text="Bairro">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="289.0" text="Rua">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="240.0" layoutY="290.0" text="Telefone">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Separator layoutX="14.0" layoutY="342.0" prefHeight="3.0" prefWidth="587.0" style="-fx-background-color: black;" />
+      <Label layoutX="16.0" layoutY="126.0" text="Horario de abertura ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="193.0" layoutY="126.0" text="Horario de fechamento">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <JFXTimePicker fx:id="horaF" defaultColor="#0ba4eb" layoutX="194.0" layoutY="143.0" prefHeight="25.0" prefWidth="139.0" />
+      <JFXTimePicker fx:id="horaA" defaultColor="#0ba4eb" layoutX="16.0" layoutY="143.0" prefHeight="25.0" prefWidth="121.0" />
+   </children>
+</Pane>

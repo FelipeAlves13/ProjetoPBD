@@ -1,12 +1,13 @@
 package br.com.daobeans;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.exception.DaoException;
-import br.com.modelbeans.Pessoa;
+import br.com.model.entidadesbeans.Pessoa;
 
 public class DaoPessoa {
 	//private  EntityManagerFactory  emf  ;
@@ -96,22 +97,51 @@ public class DaoPessoa {
 			em.close(); //  fevhar  a  conexão
 		}
 	}
-	public Pessoa buscarLogin(String usuario,String senha) throws DaoException {
+	
+	public Pessoa buscarIdDoUltimoDado() {
+		this.em = Connection.getEmf().createEntityManager();
+		em.getTransaction().begin();
+		Query q = em.createQuery("select p from Pessoa p order by p.id DESC");
+		List<Pessoa> ps =(List<Pessoa>) q.getResultList();
+		em.getTransaction().commit();
+		em.close();
+		Pessoa p = null; 
+		p= ps.get(0);
+		return p;
+	}
+	
+	public Integer idadePessoa(Date d,int id) {
+		Integer idade = null;
+		this.em = Connection.getEmf().createEntityManager();
+		em.getTransaction().begin();
+		Query q = em.createNativeQuery("select calcularidade(:nasc,:id)");
+		q.setParameter("nasc",d);
+		q.setParameter("id", id);
+		idade = (Integer)q.getSingleResult();
+		em.getTransaction().commit();
+		em.close();
+		if(idade!=null) {
+			return idade;
+		}else {
+			return 0;
+		}
+		
+	}
+	
+	public List<Pessoa> BuscarPessoasFisicas() throws DaoException{
 		try {
 			this.em = Connection.getEmf().createEntityManager();
-			em.getTransaction().begin();
-			Query q = em.createQuery("select p from Pessoa p where p.login = :u and p.senha = :s");
-			q.setParameter("u",usuario);
-			q.setParameter("s",senha);
-			Pessoa p = new Pessoa();
-			p = (Pessoa)q.getSingleResult();
+			em.getTransaction().begin(); //  abrindo
+			Query q = em.createQuery("select pessoa from Pessoa pessoa, Pessoa_fisica pf where pessoa.pessoaFisica=pf order by pessoa.nome");
+			List<Pessoa> p = q.getResultList();
 			em.getTransaction().commit();
-			//System.out.print(p.getNome());
-			em.close();
+			em.close(); 
 			return p;
 		}catch(Exception e) {
 			e.printStackTrace();
-			throw new DaoException("Erro!!Usuario ou senha esta incorreto!!");
+			throw new DaoException("Erro!!Não Existem clientes");
 		}
 	}
+	
+	
 }
